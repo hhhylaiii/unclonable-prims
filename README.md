@@ -28,9 +28,9 @@
 
 ### 簡報與論文（規劃中）
 
-- `slides/` — Lab meeting 與 thesis proposal 簡報（待新增）
+- `slides/` — Lab meeting 與 thesis proposal 簡報
 - `thesis/` — 論文草稿與相關 LaTeX 檔案（待新增）
-- `papers/` — 相關論文（待新增）
+- `papers/` — 相關論文
 
 ## 背景
 
