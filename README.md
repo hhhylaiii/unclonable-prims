@@ -1,34 +1,30 @@
-# Claude Code Report: Unclonable Encryption Research
+# Claude Code 報告：不可複製加密研究
 
-This repository contains two research reports on **unclonable encryption** — a quantum cryptographic primitive that uses the quantum no-cloning theorem to produce ciphertexts that cannot be duplicated for two independent decryptors.
+本儲存庫包含兩份關於**不可複製加密（unclonable encryption）**的研究報告——一種量子密碼原語，利用量子不可複製定理產生無法被兩個獨立解密者複製的密文。
 
-## Reports
+## 報告
 
-### 1. [Thesis Directions in Unclonable Encryption: Five Research Frontiers](./claude_report_with_research_directions.md)
+### 1. [不可複製加密的論文方向：五個研究前沿](./claude_report_with_research_directions.md)
 
-A detailed analysis of five open research directions suitable for thesis work, covering:
+針對五個適合論文研究的開放問題進行詳細分析，涵蓋：
 
-- Defining a public-key analog of the fake-key property
-- The evolution of unclonable encryption from 2020 to 2026
-- The unexplored triangle connecting fake-key, non-committing encryption, and quantum deniability
-- Unclonable functional encryption (Mehta-Müller 2024)
-- The one-to-many fake-key generalization
+- 定義偽金鑰性質（fake-key property）的公鑰類比
+- 不可複製加密從 2020 年到 2026 年的演進
+- 連結偽金鑰、非承諾加密與量子可否認性的未探索三角關係
+- 不可複製函數式加密（Mehta-Müller 2024）
+- 一對多偽金鑰推廣
 
-### 2. [Unclonable Encryption and the Elusive Public-Key Fake-Key Property](./public_key_encryption_with_fake-key_property_report.md)
+### 2. [不可複製加密與難以捉摸的公鑰偽金鑰性質](./public_key_encryption_with_fake-key_property_report.md)
 
-A focused survey on why the fake-key property (Ananth-Kaleoglu, TCC 2021) has not been extended to the public-key setting, including:
+深入調查為何偽金鑰性質（Ananth-Kaleoglu，TCC 2021）尚未被推廣至公鑰設定，包括：
 
-- The structural barrier between private-key and public-key fake-key constructions
-- A chronological map of progress from 2021 to 2026
-- Classical equivocality notions (lossy encryption, dual-mode encryption, somewhere equivocal encryption) and their roles in UE proofs
-- What a public-key fake-key property would require
+- 私鑰與公鑰偽金鑰構造之間的結構性障礙
+- 2021 年至 2026 年進展的時間軸
+- 古典可模糊性概念（損失式加密、雙模式加密、局部可模糊加密）及其在 UE 證明中的角色
+- 公鑰偽金鑰性質的必要條件
 
-## Background
+## 背景
 
-The fake-key property allows an efficient algorithm to produce a fake decryption key that makes a real ciphertext decrypt to any chosen message, indistinguishable from a genuine key-ciphertext pair. Introduced by Ananth and Kaleoglu (TCC 2021), it remains the central open challenge in public-key unclonable encryption — no construction achieves public-key UE through a direct fake-key argument without heavy machinery such as functional encryption or indistinguishability obfuscation.
+偽金鑰性質允許一個有效率的演算法產生一個偽解密金鑰，使得真實密文能解密為任意選定的訊息，且與真實的金鑰-密文對不可區分。由 Ananth 和 Kaleoglu（TCC 2021）提出，它至今仍是公鑰不可複製加密中最核心的開放挑戰——在不使用函數式加密或不可區分混淆等重型工具的情況下，目前尚無任何構造能透過直接偽金鑰論證實現公鑰 UE。
 
-Recent landmarks include the unconditional existence of an uncloneable bit (Bhattacharyya, Broadbent, and Culf, March 2026) and the first multi-copy secure unclonable encryption (Çakan et al., 2025).
-
-## Generated with
-
-[Claude Code](https://claude.ai/code) — reports generated via the Claude API (claude-sonnet-4-6).
+近期重要進展包括：不可複製位元（uncloneable bit）的無條件存在性（Bhattacharyya、Broadbent 和 Culf，2026 年 3 月）以及首個多複製安全的不可複製加密（Çakan 等，2025）。

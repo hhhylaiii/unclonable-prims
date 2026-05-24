@@ -1,61 +1,61 @@
-# Unclonable encryption and the elusive public-key fake-key property
+# 不可複製加密與難以捉摸的公鑰偽金鑰性質
 
-**No published work directly extends the fake-key property to public-key unclonable encryption without functional encryption.** This remains an open problem since Ananth and Kaleoglu first defined the fake-key property in their TCC 2021 paper. Every known public-key UE construction bypasses this approach — using functional encryption, indistinguishability obfuscation, quantum random oracle models, or entirely new quantum techniques. However, the period 2021–2026 has seen transformative progress in unclonable encryption broadly, culminating in the March 2026 resolution of the unconditional "uncloneable bit" problem by Bhattacharyya, Broadbent, and Culf. The landscape of techniques has expanded dramatically, with several classical equivocality-style notions (lossy encryption, dual-mode encryption, somewhere equivocal encryption) playing critical but indirect roles in UE constructions.
+**沒有任何已發表的工作在不使用函數式加密的情況下，將偽金鑰性質直接擴展到公鑰不可複製加密。** 自 Ananth 和 Kaleoglu 在 TCC 2021 論文中首次定義偽金鑰性質以來，這一直是一個開放問題。所有已知的公鑰 UE 構造都繞開了這個方法——使用函數式加密、不可區分混淆、量子隨機預言機模型或全新的量子技術。然而，2021 年至 2026 年間，不可複製加密整體上取得了變革性進展，以 Bhattacharyya、Broadbent 和 Culf 於 2026 年 3 月解決無條件「不可複製位元」問題為頂峰。技術景觀急劇擴展，幾個古典可模糊性風格的概念（損失式加密、雙模式加密、局部可模糊加密）在 UE 構造中扮演了關鍵但間接的角色。
 
-## The fake-key property and why it resists public-key generalization
+## 偽金鑰性質及其抵抗公鑰推廣的原因
 
-Ananth and Kaleoglu's fake-key property (Definition 16, TCC 2021) states that a PPT algorithm FakeGen can produce a fake decryption key fk such that **(fk, Enc(0)) is computationally indistinguishable from (dk, Enc(m))** and Dec(fk, ct₀) = m. They used this to build private-key UE from post-quantum one-way functions. For their public-key construction, they explicitly chose not to extend this approach, writing: *"Instead of presenting a public-key encryption satisfying fake-key property using FE, we present a direct construction of public-key unclonable encryption scheme using FE."* The core structural barrier is that in an FE-based public-key construction, the "fake key" is a functional key while the "real key" is the master secret key — these objects have fundamentally different structures, making them potentially distinguishable. In a private-key scheme, both keys are symmetric objects of the same form, and the fake-key property is achievable from PRFs. Ananth and Kaleoglu themselves noted that their private-key fake-key construction can be viewed as a special case of **somewhere equivocal encryption** (Hemenway, Jafargholi, Ostrovsky, Scafuro, and Wichs, CRYPTO 2016), a classical notion where individual ciphertext components can be "explained" as encryptions of any message.
+Ananth 和 Kaleoglu 的偽金鑰性質（定義 16，TCC 2021）指出，一個 PPT 演算法 FakeGen 可以產生一個偽解密金鑰 fk，使得 **(fk, Enc(0)) 在計算上與 (dk, Enc(m)) 不可區分**，且 Dec(fk, ct₀) = m。他們用這一點從後量子單向函數構造了私鑰 UE。對於他們的公鑰構造，他們明確選擇不擴展這個方法，寫道：*「我們不使用 FE 來呈現滿足偽金鑰性質的公鑰加密，而是直接使用 FE 呈現公鑰不可複製加密方案的直接構造。」* 核心結構障礙在於：在基於 FE 的公鑰構造中，「偽金鑰」是函數金鑰，而「真實金鑰」是主秘密金鑰——這些對象具有根本不同的結構，使其潛在地可區分。在私鑰方案中，兩個金鑰都是相同形式的對稱對象，偽金鑰性質可以從 PRF 實現。Ananth 和 Kaleoglu 本人指出，他們的私鑰偽金鑰構造可以視為**局部可模糊加密**（Hemenway, Jafargholi, Ostrovsky, Scafuro, and Wichs, CRYPTO 2016）的特例——一種古典概念，其中個別密文分量可以被「解釋」為任意訊息的加密。
 
-No subsequent work from 2021 to 2026 has defined or instantiated a public-key analog of Definition 16. Every public-key UE construction uses one of six alternative paradigms: (1) FE/Trojan technique, (2) hidden coset states with iO, (3) QROM-based constructions, (4) unclonable puncturable obfuscation, (5) simultaneous Haar indistinguishability with quantum keys, or (6) quantum functional encryption. The question of whether a natural public-key fake-key property can be defined and instantiated directly — yielding public-key UE without heavy machinery like FE or iO — remains open.
+從 2021 年到 2026 年，沒有任何後續工作定義或例示公鑰版本的定義 16。每個公鑰 UE 構造都使用以下六種替代範式之一：（1）FE/特洛伊木馬技術，（2）帶 iO 的隱藏陪集態，（3）基於 QROM 的構造，（4）不可複製可穿刺混淆，（5）具有量子金鑰的同時 Haar 不可區分性，或（6）量子函數式加密。一個自然的公鑰偽金鑰性質是否能被定義和直接例示——在不使用 FE 或 iO 等重型工具的情況下產生公鑰 UE——這個問題仍然開放。
 
-## Six years of rapid progress: a chronological map
+## 六年快速進展：時間軸
 
-The field has evolved through several distinct phases since the fake-key property was introduced.
+自偽金鑰性質被引入以來，該領域經歷了幾個不同階段的演進。
 
-**2021 established the foundations.** Ananth and Kaleoglu (TCC 2021) gave the first reusable UE schemes — private-key from OWFs, public-key from post-quantum PKE — both with search (one-way) security. Coladangelo, Liu, Liu, and Zhandry (CRYPTO 2021) introduced hidden coset states and constructed public-key single-decryptor encryption (SDE) from iO plus extractable witness encryption. Majenz, Schaffner, and Tahmasbi (2021) proved structural limitations on information-theoretic UE, including explicit cloning attacks and minimum rank requirements.
+**2021 年奠定了基礎。** Ananth 和 Kaleoglu（TCC 2021）給出了首個可重用 UE 方案——私鑰來自 OWF，公鑰來自後量子 PKE——兩者都具有搜索（單向）安全性。Coladangelo、Liu、Liu 和 Zhandry（CRYPTO 2021）引入了隱藏陪集態，並從 iO 加可提取見證加密構造了公鑰單解密者加密（SDE）。Majenz、Schaffner 和 Tahmasbi（2021）證明了資訊論 UE 的結構限制，包括顯式複製攻擊和最小秩要求。
 
-**2022–2023 achieved the first indistinguishability results.** Ananth, Kaleoglu, Li, Liu, and Zhandry (CRYPTO 2022) constructed the first UE satisfying unclonable indistinguishability — unconditionally in the quantum random oracle model using coset states. They also proved a negative result: a large class of encryption schemes cannot satisfy this property in the plain model. In 2023, Ananth, Kaleoglu, and Liu (CRYPTO 2023) introduced the **cloning games framework**, which unified quantum money, copy-protection, UE, and SDE under a single abstraction. This framework also yielded simpler QROM-based UE from BB84 states rather than the more complex coset states. Kitagawa and Nishimaki (TCC 2023) introduced **one-out-of-many unclonable security** — a relaxed but meaningful notion — and achieved it from LWE in the standard model, the first standard-model result without iO.
+**2022–2023 年實現了首個不可區分性結果。** Ananth、Kaleoglu、Li、Liu 和 Zhandry（CRYPTO 2022）在量子隨機預言機模型中使用陪集態，無條件地構造了首個滿足不可複製不可區分性的 UE。他們還證明了一個否定結果：大量加密方案在標準模型中無法滿足這一性質。2023 年，Ananth、Kaleoglu 和 Liu（CRYPTO 2023）引入了**複製遊戲框架**，將量子貨幣、複製保護、UE 和 SDE 統一在一個單一抽象下。這個框架也產生了更簡單的基於 BB84 態（而非更複雜的陪集態）的 QROM UE。Kitagawa 和 Nishimaki（TCC 2023）引入了**一對多不可複製安全性**——一種放鬆但有意義的概念——並在標準模型中從 LWE 實現了它，這是首個不使用 iO 的標準模型結果。
 
-**2024 brought modular constructions and the first plain-model results.** Ananth and Behera (CRYPTO 2024) proposed **unclonable puncturable obfuscation (UPO)** as a universal building block, from which they modularly derived quantum money, copy-protection, UE, and SDE. Ananth, Kaleoglu, and Yuen (ITCS 2025, circulated 2024) achieved UE with **indistinguishability security and quantum decryption keys in the plain model** using a new technique called simultaneous Haar indistinguishability — showing that non-communicating entangled players cannot distinguish between receiving the same versus independent Haar random states. Çakan and Goyal (TCC 2024) constructed the first **unbounded collusion-resistant** copy-protection schemes from sub-exponential iO plus LWE. Mehta and Müller (ePrint 2024) defined unclonable functional encryption and obtained the first **public-key UE with variable decryption keys** — though this construction goes through quantum functional encryption, not a direct fake-key property.
+**2024 年帶來了模組化構造和首個標準模型結果。** Ananth 和 Behera（CRYPTO 2024）提出了**不可複製可穿刺混淆（UPO）**作為通用構建塊，從中模組化地推導出量子貨幣、複製保護、UE 和 SDE。Ananth、Kaleoglu 和 Yuen（ITCS 2025，2024 年流傳）在標準模型中使用一種名為同時 Haar 不可區分性的新技術，實現了具有**不可區分性安全和量子解密金鑰的 UE**——表明不通信的糾纏玩家無法區分接收相同還是獨立的 Haar 隨機態。Çakan 和 Goyal（TCC 2024）從次指數 iO 加 LWE 構造了首個**無界抗合謀**複製保護方案。Mehta 和 Müller（ePrint 2024）定義了不可複製函數式加密，並獲得了首個**具有可變解密金鑰的公鑰 UE**——儘管這個構造通過量子函數式加密，而非直接偽金鑰性質。
 
-**2025–2026 resolved fundamental open problems.** Bhattacharyya and Culf proved unconditional UE with inverse-polynomial security using decoupling techniques (Nature Physics, February 2026). Then in March 2026, Bhattacharyya, Broadbent, and Culf proved the **unconditional existence of an uncloneable bit with negligible (exponentially small) adversary advantage** — resolving the central open problem in the field. Combined with Hiroka, Kitagawa, Nishimaki, and Yamakawa's plaintext expansion technique (TCC 2024), this yields UE for arbitrary-length messages under standard assumptions. Bartusek and Goldin (March 2026) achieved **reusable UE with full indistinguishability** in the Haar random oracle model, providing the first evidence that reusable UE exists in "minicrypt."
+**2025–2026 年解決了基本開放問題。** Bhattacharyya 和 Culf 使用去耦技術證明了具有逆多項式安全性的無條件 UE（Nature Physics，2026 年 2 月）。然後在 2026 年 3 月，Bhattacharyya、Broadbent 和 Culf 證明了**具有可忽略（指數小）對手優勢的不可複製位元的無條件存在性**——解決了該領域的中心開放問題。結合 Hiroka、Kitagawa、Nishimaki 和 Yamakawa 的明文擴展技術（TCC 2024），這在標準假設下產生了任意長度訊息的 UE。Bartusek 和 Goldin（2026 年 3 月）在 Haar 隨機預言機模型中實現了**具有完整不可區分性的可重用 UE**，提供了在「miniCrypt」中存在可重用 UE 的首個證據。
 
-## Parallel developments: untelegraphable encryption and multi-copy security
+## 平行發展：不可電報加密與多複製安全性
 
-Two notable new directions emerged that relate to but do not use the fake-key property. Champion, Kitagawa, Nishimaki, and Yamakawa (TCC 2025) introduced **untelegraphable encryption (UTE)**, based on the no-telegraphing principle — a relaxation of UE where the adversary must produce classical rather than quantum descriptions. They achieved information-theoretic UTE with indistinguishability security in the plain model and showed that collusion-resistant UTE implies the impossibility of hyperefficient shadow tomography. Broadbent, Culf, and Rochette (October 2025) subsequently proved **asymptotic equivalence between UTE and UE** as the number of adversaries grows, establishing UTE as a meaningful stepping stone toward full UE. This direction was inspired by Nehoran and Zhandry's computational separation between quantum no-cloning and no-telegraphing (ITCS 2024).
+兩個值得注意的新方向出現，它們與偽金鑰性質相關但不使用它。Champion、Kitagawa、Nishimaki 和 Yamakawa（TCC 2025）引入了**不可電報加密（UTE）**，基於不可電報原則——UE 的放鬆版本，其中對手必須產生古典而非量子描述。他們在標準模型中實現了具有不可區分性安全的資訊論 UTE，並表明抗合謀 UTE 蘊含超高效影子層析的不可能性。Broadbent、Culf 和 Rochette（2025 年 10 月）隨後證明了隨著對手數量增長，**UTE 與 UE 在漸近意義上等價**，確立了 UTE 作為走向完整 UE 的有意義步石。這個方向受到 Nehoran 和 Zhandry（ITCS 2024）對量子不可複製與不可電報之間計算分離的啟發。
 
-On the multi-copy front, Çakan, Goyal, Kitagawa, Nishimaki, and Yamakawa (ePrint 2025) introduced a generic compiler upgrading single-copy collusion-resistant primitives to **multi-copy security** assuming only OWFs. This yielded the first multi-copy secure quantum money, SDE, and UE, as well as the first multi-challenge secure UE scheme. Their SDE compiler uses functional encryption — again, not the fake-key property.
+在多複製安全性方面，Çakan、Goyal、Kitagawa、Nishimaki 和 Yamakawa（ePrint 2025）引入了一個通用編譯器，僅假設 OWF 就能將單複製抗合謀原語升級到**多複製安全性**。這產生了首個多複製安全的量子貨幣、SDE 和 UE，以及首個多挑戰安全的 UE 方案。他們的 SDE 編譯器使用函數式加密——同樣，不使用偽金鑰性質。
 
-## Classical equivocality notions and their quantum connections
+## 古典可模糊性概念及其與量子的連結
 
-Several classical notions closely related to the fake-key property play important roles in unclonable cryptography, though none has been used to directly construct public-key UE via a fake-key-style argument.
+幾個與偽金鑰性質密切相關的古典概念在不可複製密碼學中扮演重要角色，儘管沒有任何一個被用於通過偽金鑰風格論證直接構造公鑰 UE。
 
-**Somewhere equivocal encryption** has the most direct connection. Ananth and Kaleoglu explicitly stated that their private-key fake-key construction is a special case of this primitive from Hemenway et al. (CRYPTO 2016). The equivocability — each ciphertext component can be "explained" as an encryption of any bit — is exactly what enables the simulation argument in UE security proofs.
+**局部可模糊加密**有最直接的連結。Ananth 和 Kaleoglu 明確指出，他們的私鑰偽金鑰構造是 Hemenway 等人（CRYPTO 2016）這一原語的特例。可模糊性——每個密文分量可以被「解釋」為任意位的加密——正是使 UE 安全性證明中的模擬論證成為可能的關鍵。
 
-**Dual-mode and lossy encryption** serve as the backbone of revocable cryptography. Ananth, Poremba, and Vaikuntanathan (TCC 2023) made the Dual-Regev encryption scheme revocable by representing decryption keys as quantum Gaussian superpositions. The proof crucially exploits the dual-mode structure of LWE-based encryption: switching from injective mode (functional decryption) to lossy mode (ciphertexts statistically independent of the message). Ananth, Hu, and Huang (TCC 2024) resolved the main open problem from this line by proving key-revocable Dual-Regev security from polynomial LWE hardness. **Lossy functions** appear explicitly in Shmueli and Zhandry's work on unclonable cryptography with linear quantum memory (ePrint 2025), where exponentially-secure lossy functions from LWE serve as a building block for one-shot signatures.
+**雙模式和損失式加密**是可撤銷密碼學的支柱。Ananth、Poremba 和 Vaikuntanathan（TCC 2023）通過將解密金鑰表示為量子高斯疊加態，使雙 Regev 加密可撤銷。該證明關鍵地利用了基於 LWE 的加密的雙模式結構：從單射模式（函數解密）切換到損失模式（密文在統計上獨立於訊息）。Ananth、Hu 和 Huang（TCC 2024）通過從多項式 LWE 困難性證明可撤銷雙 Regev 安全性，解決了這條線中的主要開放問題。**損失函數**在 Shmueli 和 Zhandry 關於具有線性量子記憶體的不可複製密碼學的工作（ePrint 2025）中明確出現，其中來自 LWE 的指數安全損失函數作為一次性簽名的構建塊。
 
-**Deniable encryption** connects through Coladangelo, Goldwasser, and Vazirani (STOC 2022), who showed that quantum computation enables "perfect unexplainability" — a property impossible classically — where there is provably no efficient way to establish that a ciphertext was produced by a specific computation. While not directly about UE, both deniable and unclonable encryption exploit the inability to simultaneously "explain" and "use" quantum states.
+**可否認加密**通過 Coladangelo、Goldwasser 和 Vazirani（STOC 2022）建立連結，他們表明量子計算實現了「完全不可解釋性」——一種在古典上不可能的性質——其中不存在有效的方法來確認密文是由特定計算產生的。雖然不直接關於 UE，但可否認加密和不可複製加密都利用了無法同時「解釋」和「使用」量子態的性質。
 
-The following table summarizes how these classical notions map to UE techniques:
+下表總結了這些古典概念如何對應到 UE 技術：
 
-| Classical notion | Role in unclonable encryption | Key papers |
+| 古典概念 | 在不可複製加密中的角色 | 關鍵論文 |
 |---|---|---|
-| Somewhere equivocal encryption | Directly underlies the private-key fake-key property | Ananth-Kaleoglu TCC 2021 |
-| Dual-mode encryption (Dual-Regev) | Enables revocable PKE/FHE via injective-to-lossy mode switching | Ananth-Poremba-Vaikuntanathan TCC 2023; Ananth-Hu-Huang TCC 2024 |
-| Lossy encryption/functions | Building block for one-shot signatures; mode-switching in security proofs | Shmueli-Zhandry ePrint 2025 |
-| Deniable encryption | Quantum strengthening yields "perfect unexplainability" | Coladangelo-Goldwasser-Vazirani STOC 2022 |
-| iO-based puncturing/simulation | Replaces real programs with zero programs (analogous to lossy mode) | Coladangelo et al. CRYPTO 2021; Ananth-Behera CRYPTO 2024; Çakan-Goyal TCC 2024 |
+| 局部可模糊加密 | 直接支撐私鑰偽金鑰性質 | Ananth-Kaleoglu TCC 2021 |
+| 雙模式加密（雙 Regev） | 透過單射到損失模式切換實現可撤銷 PKE/FHE | Ananth-Poremba-Vaikuntanathan TCC 2023; Ananth-Hu-Huang TCC 2024 |
+| 損失式加密/函數 | 一次性簽名的構建塊；安全性證明中的模式切換 | Shmueli-Zhandry ePrint 2025 |
+| 可否認加密 | 量子加強產生「完全不可解釋性」 | Coladangelo-Goldwasser-Vazirani STOC 2022 |
+| 基於 iO 的穿刺/模擬 | 用零程式替換真實程式（類比損失模式） | Coladangelo et al. CRYPTO 2021; Ananth-Behera CRYPTO 2024; Çakan-Goyal TCC 2024 |
 
-## What a public-key fake-key property would need
+## 公鑰偽金鑰性質的必要條件
 
-The fundamental pattern across all UE constructions is: **a classical simulation/equivocality backbone combined with quantum no-cloning provides unclonable security.** The private-key fake-key property achieves this cleanly because both the real and fake keys are symmetric objects. For a public-key analog, one would need a public-key encryption scheme where:
+所有 UE 構造的基本模式是：**古典模擬/可模糊性支柱與量子不可複製定理相結合提供不可複製安全性。** 私鑰偽金鑰性質以清晰的方式實現了這一點，因為真實金鑰和偽金鑰是對稱對象。對於公鑰類比，需要一種公鑰加密方案，其中：
 
-- A public key pk is published and used for encryption.
-- A real quantum decryption key dk decrypts correctly.
-- A fake key generator, given pk and a message m, produces a fake decryption key fk such that (pk, fk, Enc_pk(0)) ≈ (pk, dk, Enc_pk(m)).
+- 公鑰 pk 被發布並用於加密。
+- 真實量子解密金鑰 dk 能正確解密。
+- 偽金鑰生成器，給定 pk 和訊息 m，產生一個偽解密金鑰 fk，使得 (pk, fk, Enc_pk(0)) ≈ (pk, dk, Enc_pk(m))。
 
-The challenge is that fk must be indistinguishable from dk even given pk, which means the public key cannot reveal too much about the structure of valid decryption keys. This tension — between public verifiability of the encryption key and equivocability of the decryption key — is what makes the public-key case fundamentally harder. Coladangelo and Gunn's notion of **coupled unclonable encryption (cUE)** from STOC 2024, constructible from OWFs, and **key-testable UE** (where one can publicly test whether a quantum state is a valid decryption key) represent partial progress, but neither directly instantiates a fake-key property. The simultaneous Haar indistinguishability technique of Ananth, Kaleoglu, and Yuen achieves something conceptually similar — real and independent quantum keys are indistinguishable — but only with quantum decryption keys, not classical public-key encryption.
+挑戰在於：即使給定 pk，fk 也必須與 dk 不可區分，這意味著公鑰不能揭示太多關於有效解密金鑰結構的資訊。這種張力——加密金鑰的公開可驗證性與解密金鑰的可模糊性之間——使公鑰情況從根本上更加困難。Coladangelo 和 Gunn（STOC 2024）的**耦合不可複製加密（cUE）**概念，可從 OWF 構造，以及**可測試金鑰 UE**（可以公開測試量子態是否為有效解密金鑰）代表了部分進展，但兩者都沒有直接例示偽金鑰性質。Ananth、Kaleoglu 和 Yuen 的同時 Haar 不可區分性技術實現了概念上類似的東西——真實金鑰和獨立量子金鑰是不可區分的——但僅限於量子解密金鑰，而非古典公鑰加密。
 
-## Conclusion
+## 結論
 
-The fake-key property remains confined to the private-key setting. Despite explosive progress in unclonable encryption from 2021 to 2026 — including the resolution of the unconditional uncloneable bit problem, the achievement of reusable indistinguishability-secure UE in oracle models, and the development of powerful frameworks like cloning games and unclonable puncturable obfuscation — no construction achieves public-key UE through a direct fake-key-style argument. The closest connections are conceptual: classical notions of lossy encryption, dual-mode encryption, and somewhere equivocal encryption provide the simulation backbone in many UE proofs, but always paired with heavy additional machinery (FE, iO, QROM, or quantum keys). A direct, efficient public-key fake-key construction that avoids these heavy tools would represent a significant advance, potentially simplifying existing public-key UE constructions and clarifying the minimal assumptions needed. The recent unconditional results by Bhattacharyya, Broadbent, and Culf suggest that information-theoretic techniques — particularly decoupling and monogamy of entanglement — may eventually provide new pathways to this goal that bypass the structural barriers of the computational approach entirely.
+偽金鑰性質仍然局限於私鑰設定。儘管從 2021 年到 2026 年，不可複製加密取得了爆炸性進展——包括解決無條件不可複製位元問題、在預言機模型中實現可重用不可區分性安全 UE、以及開發複製遊戲和不可複製可穿刺混淆等強大框架——沒有任何構造通過直接偽金鑰風格論證實現公鑰 UE。最接近的連結是概念性的：古典的損失式加密、雙模式加密和局部可模糊加密概念在許多 UE 證明中提供模擬支柱，但總是需要配合重型附加工具（FE、iO、QROM 或量子金鑰）。一個直接、高效的公鑰偽金鑰構造——避免這些重型工具——將代表一個重大進展，有可能簡化現有的公鑰 UE 構造並闡明所需的最小假設。Bhattacharyya、Broadbent 和 Culf 的近期無條件結果表明，資訊論技術——特別是去耦和糾纏的單配性——最終可能提供實現這一目標的新途徑，完全繞過計算方法的結構障礙。
