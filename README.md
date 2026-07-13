@@ -23,6 +23,8 @@
 
 完整的閱讀順序、報告間關係與更正狀態，見 [Reports/README.md](./Reports/README.md)。
 
+- [Meeting 討論報告：兩條候選主軸（2026-07-15）](./Reports/Meeting_2026-07-15_Two_Routes_Discussion.md)
+  — 給老師的 high-level 討論文件：Unclonable IPFE 與 Unclonable IBE 兩條路線各自「要做什麼、為什麼可以、大概的方式」、兩線對照表、三個論文骨架選項與待拍板問題清單。**（meeting 前唯一必讀）**
 - [不可複製加密的論文方向：五個研究前沿](./Reports/Research_Directions_of_Unclonable_Encryption.md)
   — 涵蓋公鑰偽金鑰、UE 演進史、偽金鑰與 NCE 的三角關係、不可複製函數加密、一對多偽金鑰推廣等五個方向的詳細分析。（方向一/三的新穎性判斷已被 2026-07 精讀報告更正，見文首更正註記）
 - [量子函數加密碩論方向 Survey](./Reports/Research_Directions_of_Quantum_Functional_Encryption.md)

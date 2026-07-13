@@ -17,6 +17,7 @@
 
 | 暱稱 | 檔案 | 日期 | 狀態 |
 |---|---|---|---|
+| **Meeting 討論報告** | [Meeting_2026-07-15_Two_Routes_Discussion.md](./Meeting_2026-07-15_Two_Routes_Discussion.md) | 2026-07-13 | ✅ 現行（meeting 用 high-level 彙整：兩線「要做什麼／為什麼可以／大概怎麼做」＋待拍板問題；細節出處對照見其 §7） |
 | QFE survey | [Research_Directions_of_Quantum_Functional_Encryption.md](./Research_Directions_of_Quantum_Functional_Encryption.md) | 2026-05 | ⚠️ 部分過時：方向 1 直構想法被 D4 攻擊否定；Project B/C 判斷已由深度分析更新 |
 | 五方向報告 | [Research_Directions_of_Unclonable_Encryption.md](./Research_Directions_of_Unclonable_Encryption.md) | 2026-05 | ⚠️ 部分過時：方向一/三的新穎性判斷被 HKNY24 App E 推翻；方向五結果端被 CGKNY26 拿走 |
 | 偽金鑰報告 | [public_key_encryption_with_fake-key_property_report.md](./public_key_encryption_with_fake-key_property_report.md) | 2026-05（07-12 更正） | ⚠️ 核心判斷已更正：「六種範式」應為七種（HKNY24 App E 的 RNCE 路線） |
@@ -29,7 +30,7 @@
 
 ## 3. 建議閱讀順序
 
-**只想知道現在該做什麼** → 精讀報告 §0/§5 → Deep Dive §0/§6。
+**去 meeting／只要結論** → Meeting 討論報告（兩線對照與問題清單）→ 精讀報告 §0/§5 → Deep Dive §0/§6。
 
 **完整脈絡（時間順）**：
 
