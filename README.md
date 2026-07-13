@@ -29,6 +29,10 @@
   — 以已精讀的四篇論文為錨點，盤點 2025 下半年至 2026 年 7 月的最新進展（BMMS26 不可能性、不可複製位元、HROM UE、多複製安全上 CRYPTO 2026 等），分析空白區與擁擠區，並評估五條候選研究路線的優先序。
 - [路線甲深度分析：從 IPFE 到 Unclonable IPFE](./Deep_Dive_Route_A_Unclonable_IPFE.md)
   — 釘死目標語義、逐條盤點 MM24 三個定理的介面需求（發現 Thm 7 lifting 消耗 universality）、提出三條技術路徑（直接合成 / 重建階梯 / Clifford 直構與其可逆性洩漏攻擊）、難點總表 D1–D10 與知識補完清單 K1–K12、12–16 週執行計畫。
+- [AK21 精讀與 PQC 槽替換品總盤點](./AK21_Close_Reading_and_PQC_Slot_Survey.md)
+  — 逐頁精讀 AK21 全文（Def 16 偽金鑰、§4/§5 兩個構造與證明的完整拆解、shared-randomness 歸約技巧），歸納證明真正消耗的介面 E1–E4，發現 Def 16 過強、trapdoored 可模糊化（RNCE 形狀）即足夠——**並查證出此觀察已被 [HKNY24]（TCC 2024）Appendix E 實現**（RNCE 填槽、unclonable-IND 保持），修正三份既有報告的盲點。盤點剩餘真空格 V1–V3，建議主軸轉回路線甲、以 HKNY24 為 P1 證明模板。
+- [白板解碼：AK21 的「otUE + PQC」配方與重構 UE 的換槽方向](./AK21_Hybrid_Recipe_and_PQC_Slot_Replacement.md)
+  — 把老師白板公式對應到 AK21 §1.2 的 hybrid approach（otUE 量子核心 + 可替換的 PQC 槽），釐清 PQC 槽的真實介面（後量子安全 + 偽金鑰性質）。在「輸出仍是 UE」的正確讀法下盤點四個換槽方向 R1–R4（公鑰偽金鑰不經 FE／compiler 解耦／unclonable-IND 版／一對多偽金鑰）與已關閉格子，並釐清白板線與路線甲是輸出物不同的兩條線、共用偽金鑰零件。含 meeting 用的定錨問題與題目提案。
 
 ### 簡報與論文（規劃中）
 
