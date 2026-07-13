@@ -1,6 +1,11 @@
 # 量子函數加密（Quantum Functional Encryption）碩論方向 Survey
 
 > 背景：報告完 Mehta & Müller (2024) "Unclonable Functional Encryption"（arXiv:2410.06029）後，老師給出兩個延伸方向的建議，並進一步討論「升級階梯」這個 compiler 式的研究方向。本文件整理 survey 結果與初步思考。
+>
+> ⚠️ **狀態註記（2026-07-10 後）**：本報告（2026-05）的構想已由[路線甲深度分析](./Deep_Dive_Route_A_Unclonable_IPFE.md)接手深化，其中三處判斷已更新——
+> 1. **方向 1 的「IPFE + QOTP 直接拼」想法已被否定**：Clifford 的 pad 更新映射可逆，解密者可逆推原始 pad 直接取回 ρ（可逆性洩漏攻擊，深度分析 §3.3 / 難點 D4），該想法轉為 no-go observation。
+> 2. **Project B 的「跑一次第四層 lifting」不成立 as stated**：MM24 Thm 7 消耗 universality（包裝電路遠超出 IPFE 類，深度分析 §2 / 難點 D1），換底層的真正工作量在重建 lifting；目前首攻路徑改為直接合成 P1。
+> 3. **Project C 的警告升級**：候選的無條件底座 BBC26 使用 Haar 隨機酉、**無有效構造**，直接違反 lifting 對解密電路 poly 描述的需求（深度分析 §3.2 / 難點 D6），只能當 conditional result。
 
 ---
 

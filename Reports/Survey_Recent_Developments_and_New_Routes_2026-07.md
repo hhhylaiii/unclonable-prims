@@ -1,5 +1,9 @@
 # 2026 年 7 月文獻總盤點：近期發展與可著手的研究路線
 
+> ⚠️ **更正註記（2026-07-12/13，兩則）**：
+> 1. **HKNY24 Appendix E 被本報告漏掉**——§2.2 記錄的「HKNY24 明文擴展」與 §2.5 記錄的「RNCE with quantum ciphertexts（arXiv:2311.09487）」其實是**同一篇論文**，且其 Appendix E 已用 RNCE 從 one-time unclonable SKE + PKE 構造出公鑰 UE、並證明 unclonable-IND 保持。因此 §2.5 的「公鑰偽金鑰性質仍無人做」與 §三空白區表的對應格子需修正：字面定義仍空，但實質內容已被做掉。詳見 [AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md) §3。
+> 2. **路線甲描述中的「Clifford-QOTP 直接構造想法」已被否定**——[路線甲深度分析](./Deep_Dive_Route_A_Unclonable_IPFE.md) §3.3 發現可逆性洩漏攻擊（L_C 可逆 ⇒ 解密者可逆推 pad、直接取回 ρ），該想法已從構造候選轉為 no-go observation。
+>
 > **Survey 日期**：2026-07-10
 > **方法**：以已精讀的四篇論文為錨點——[AK21]《Unclonable Encryption, Revisited》、[AKL23]《Cloning Games》、[MM24]《Unclonable Functional Encryption》、[ABDP15]《Simple FE for Inner Products》——向外檢索 2024 年 10 月（MM24 發表）之後的所有相關文獻，重點放在 2025 下半年至 2026 年 7 月的最新結果。
 > **目的**：更新三份既有報告未涵蓋的進展，評估哪些研究路線仍然空白、哪些已被搶佔，並提出符合已讀論文基礎的新候選路線。
@@ -96,7 +100,7 @@ Copy protection 端持續活躍：UPO Revisited（ePrint 2025/1880，TCC 2025）
 ### 2.5 可模糊性／偽金鑰周邊（錨點：主線二）
 
 - **Non-Committing Registered FE**（Sarkar，ePrint 2026/1293，AFRICACRYPT 2026）：把 NCE 推廣到 registered FE 設定，lattice 實例化基於 **plain LWE + equivocal LWE**。兩個看點：(1) 「**equivocal LWE**」已成為一個被命名、被使用的假設——你若要正式化偽金鑰性質，這是現成的代數基礎；(2) 證明「NCE × FE」的組合是學界認可的定義性貢獻題型。
-- **RNCE with quantum ciphertexts**：《Robust Combiners and Universal Constructions for Quantum Cryptography》（arXiv:2311.09487）中出現「量子密文的接收者 NCE 可從量子密文 PKE 構造」；certified everlasting RNCE 亦已在 arXiv:2207.13878 中被定義。**但「偽金鑰性質的公鑰類比」本身仍無人正式定義**——主線二的 open problem 原封不動。
+- **RNCE with quantum ciphertexts**：《Robust Combiners and Universal Constructions for Quantum Cryptography》（arXiv:2311.09487，即 [HKNY24]）中出現「量子密文的接收者 NCE 可從量子密文 PKE 構造」；certified everlasting RNCE 亦已在 arXiv:2207.13878 中被定義。~~**但「偽金鑰性質的公鑰類比」本身仍無人正式定義**——主線二的 open problem 原封不動。~~ **⚠️ 此判斷已被更正**：同一篇論文的 Appendix E 已用 RNCE 構造公鑰 UE（見文首更正註記 1）。
 
 ---
 
@@ -114,6 +118,8 @@ copy protection from iO                  IPFE 的偽金鑰／可模糊性
 PKE/ABE/PRF/簽章的 SKL                   cloning game for IPFE functionality
 ```
 
+（⚠️ 上表「公鑰偽金鑰性質正式定義」一格已被更正：實質內容已被 HKNY24 App E 佔走，僅剩字面定義與 V1 型刻畫工作，見文首更正註記 1。）
+
 三個結構性觀察：
 
 1. **QFE 構造端是整張地圖上最反常的空白**。MM24 出版 21 個月、被 BMMS26 劃清死路之後，「受限類 + IND 安全」是官方認證的活路，卻沒有任何人（包括原作者）動手。合理解釋：會做 lattice FE 的人不熟量子編碼，會做量子的人不熟 IPFE 代數——你恰好兩邊都在讀，這就是你的比較優勢。
@@ -128,7 +134,7 @@ PKE/ABE/PRF/簽章的 SKL                   cloning game for IPFE functionality
 
 ### 路線甲：QFE/UFE for restricted classes（原路徑 1，地位強化）
 
-- **內容**：Project A–D 照舊——把 MM24 第三層的 TwoFE/universal circuit 換成 IPFE 代數結構，目標「Unclonable IPFE for quantum messages」；含 Clifford-QOTP 金鑰更新線性化的直接構造想法（QOTP pad 更新對 Clifford 電路是線性映射，可由 IPFE 直接發放，砍掉整個 QGC 層）
+- **內容**：Project A–D 照舊——把 MM24 第三層的 TwoFE/universal circuit 換成 IPFE 代數結構，目標「Unclonable IPFE for quantum messages」；~~含 Clifford-QOTP 金鑰更新線性化的直接構造想法（QOTP pad 更新對 Clifford 電路是線性映射，可由 IPFE 直接發放，砍掉整個 QGC 層）~~（⚠️ 此直構想法已被路線甲深度分析 §3.3 的可逆性洩漏攻擊否定，見文首更正註記 2）
 - **Survey 後的更新**：(1) 引用地圖確認無人搶進；(2) BMMS26 給了最好的動機段落素材（「SIM 不可能 ⇒ 受限類是必然出路」）；(3) 古典元件可升級為 tightly-secure lattice IPFE（ePrint 2025/1613）
 - **契合度**：MM24（骨架）+ ABDP15（替換元件）+ AK21/AKL23（第四層 lifting 的安全性語言）——四篇全用上
 - **風險**：中。第三層拼裝邏輯需重新設計（已知）；競速壓力來自原作者團隊（目前判斷在做 impossibility，非構造）
