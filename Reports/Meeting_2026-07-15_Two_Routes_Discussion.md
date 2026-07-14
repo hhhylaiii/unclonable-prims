@@ -1,4 +1,4 @@
-# Meeting 討論報告：兩條候選主軸——Unclonable IPFE 與 Unclonable IBE
+# 討論報告：兩條候選主軸——Unclonable IPFE 與 Unclonable IBE
 
 > **用途**：2026-07-15 與老師討論碩論主軸的 high-level 文件。本文只保留討論需要的高度；每個判斷的技術細節與查證證據見文末 §7 的出處對照。
 > **整理日期**：2026-07-13
@@ -127,7 +127,7 @@ Enc(mpk, id, m):  抽一次性金鑰 k
 **定理形狀（候選）**：若存在後量子的 RNC-IBE（selective-ID 即可起步）與 one-time unclonable encryption，則存在 unclonable IBE——語意安全承自 IBE、不可複製性無損承自 otUE，且對任意多的非挑戰身分金鑰查詢安全。
 
 **實質工作三塊（這題不是套模板白撿）**：
-1. **後量子 RNC-IBE**：現成的主構造用 bilinear pairing（非後量子）；後量子的 relaxed 版只支援**多項式大小的身分空間**。兩個選項：第一條定理誠實地接受 poly-ID 起步；或自造 LWE 上的 selective RNC-IBE（GPV/ABB 陷門＋可模糊化）——後者本身就是論文的技術核心。**→ 需要老師定案。**
+1. **後量子 RNC-IBE**：現成的主構造用 bilinear pairing（非後量子）；後量子的 relaxed 版只支援**多項式大小的身分空間**。兩個選項：第一條定理誠實地接受 poly-ID 起步；或自造 LWE 上的 selective RNC-IBE（GPV/ABB 陷門＋可模糊化）——後者本身就是論文的技術核心。
 2. **定義**：cloning game 中身分金鑰查詢在「分裂前 vs 分裂後」的給法有幾個自然變體，要選定並論證。
 3. **與 KN23 的關係**：證明蘊含／分離，劃清貢獻邊界。
 
