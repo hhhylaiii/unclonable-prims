@@ -1,6 +1,8 @@
 # 路線甲深度分析：從 IPFE 到 Unclonable IPFE——技術路徑、難點地圖與知識補完清單
 
-> ℹ️ **後續更新（2026-07-12）**：[AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md)發現 [HKNY24]（arXiv:2311.09487，TCC 2024）**Appendix E** 用 RNCE 從 one-time unclonable SKE + PKE 構造公鑰 UE（Lemma E.2 證 unclonable-IND 保持）。對本文的意義：**P1 的 UE 歸約段（「古典秘密附進 B/C register、reveal 後本地重建金鑰」的管線）有了現成的證明模板**（精讀報告 §5.2）；坑 3 / D8 需要的 multi-bit 擴展也在同一篇論文（§8 明文擴展）。本文其餘內容不受影響。
+> **狀態變更（2026-08-01）：本路線已降為備援／延伸章。** 碩論主軸定案為 **W1（Unclonable IBE）**，見 [W1 路線圖](./Route_W1_Unclonable_IBE_Roadmap.md)。本文的技術內容（P1–P3、D1–D10、K1–K12）**全部仍然有效**，用途改為：(a) W1 撞牆時的退路；(b) 論文的延伸章／future work；(c) §3.3 的 Clifford 直構 no-go observation 是隨時可交付的 2–3 頁短文。§6 的 12–16 週執行計畫暫不啟動。
+>
+> **後續更新（2026-07-12）**：[AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md)發現 [HKNY24]（arXiv:2311.09487，TCC 2024）**Appendix E** 用 RNCE 從 one-time unclonable SKE + PKE 構造公鑰 UE（Lemma E.2 證 unclonable-IND 保持）。對本文的意義：**P1 的 UE 歸約段（「古典秘密附進 B/C register、reveal 後本地重建金鑰」的管線）有了現成的證明模板**（精讀報告 §5.2）；坑 3 / D8 需要的 multi-bit 擴展也在同一篇論文（§8 明文擴展）。本文其餘內容不受影響。
 > **日期**：2026-07-10
 > **前提**：已決定主攻路線甲（把 MM24 升級階梯的底層換成 IPFE，最終 lift 成 unclonable 版本）。
 > **本文目的**：(1) 把「Unclonable IPFE for quantum messages」這個目標的語義釘死；(2) 逐條盤點 MM24 三個定理對底層元件的介面需求，找出換成 IPFE 之後哪裡會斷；(3) 給出三條具體技術路徑與各自的難點；(4) 列出需要補足的知識與驗收標準。
@@ -114,7 +116,7 @@ Dec(sk_y, ct): 由 K 導出 k_id；r = UE.Dec(k_id, ρ_UE)
 - **坑 1：金鑰分發時序失配。** UE 金鑰 k_id 是 per-ciphertext 的，但 FE 的函數金鑰在加密前就發出。上面用 PRF 解掉（AK21 可重用構造的同款技巧——他們的 otp′ = θ ⊕ PRF_k(r) 就是這個模式），代價是 **KeyGen 要把 PRF 主鑰 K 放進每把 sk_y** → 任何單一金鑰持有者可以解出所有密文的 r，於是他學到的是 x+r 與 r，即 ⟨x,y⟩ 之外還學到…注意：他學到 x + r 與 r ⇒ 學到 x！**這是天真版本的漏洞**：K 必須換成「只夠導出 UE 解密能力、不夠重建 r 全向量」的東西——但 UE.Dec 本來就輸出整個 r。修正方向（三選一，都是可做的研究決策）：
   (i) 接受它：把功能性定義成「金鑰持有者本來就可學 x」？不行，那 FE 就沒意義。
   (ii) 讓 IPFE 那邊不是加密 x+r 而是加密 x，把 r 融進 **IPFE 金鑰**：sk_y 對應向量 y 但帶偏移 ⟨r,·⟩……r 是 per-ct 的，金鑰做不到。
-  (iii) **正解候選**：UE 加密的不是 r 而是一個短種子 s，r = G(s)（PRG）；且 UE.Dec 的輸出不直接給 r，而是——不行，拿到 s 一樣重建 r。**根本張力：任何讓合法解密者「算出 ⟨r,y⟩」的機制，若給出的資訊超過 ⟨r,y⟩ 本身，就洩漏 x 的額外資訊。** 真正的正解是讓量子部分輸出**恰好 ⟨r,y⟩**——即量子部分本身要有「函數式解密」結構，例如：UE 加密的物件改為 r，但 sk_y 內含的不是完整 UE 金鑰、而是「只能解出 ⟨r,y⟩ 的受限金鑰」——這就把問題遞迴成「r 上的（一次性、資訊論）IPFE」！好消息：**一次性、對稱金鑰、資訊論安全的 IPFE 是存在且簡單的**（pad-based：金鑰方持有 r 的線性函數值即可；或用 ⟨r,y⟩ = 對 r 的線性雜湊）。具體地：Enc 時對每個「將來可能的 y」……y 空間指數大，不能枚舉——需要用結構：令量子部分為 UE.Enc(k_id, s)、r = G(s)，sk_y 給 (ipfe.sk_y, K)，解密者解出 s 後重建 r 並算 ⟨r,y⟩——又回到洩漏 x。**誠實結論：坑 1 是 P1 最硬的一塊**，目前最乾淨的出路是**把功能性弱化為「單金鑰或有界金鑰 per 密文」，或接受解密者學到 r（等價於：這是『unclonable one-time-programmable IPFE』——每份密文只保護到第一次解密前）**；或者第四個方向：用 **FE 本身遞迴**（量子部分放 IPFE₂.Enc(r) 而 sk_y 含 IPFE₂.KeyGen(y)，UE 只包 IPFE₂ 的解密能力）——這開始長得像 MM24 的 trojan 結構，值得跟老師討論。⚠️ 把此坑寫清楚本身就是論文的 technical core。
+  (iii) **正解候選**：UE 加密的不是 r 而是一個短種子 s，r = G(s)（PRG）；且 UE.Dec 的輸出不直接給 r，而是——不行，拿到 s 一樣重建 r。**根本張力：任何讓合法解密者「算出 ⟨r,y⟩」的機制，若給出的資訊超過 ⟨r,y⟩ 本身，就洩漏 x 的額外資訊。** 真正的正解是讓量子部分輸出**恰好 ⟨r,y⟩**——即量子部分本身要有「函數式解密」結構，例如：UE 加密的物件改為 r，但 sk_y 內含的不是完整 UE 金鑰、而是「只能解出 ⟨r,y⟩ 的受限金鑰」——這就把問題遞迴成「r 上的（一次性、資訊論）IPFE」！好消息：**一次性、對稱金鑰、資訊論安全的 IPFE 是存在且簡單的**（pad-based：金鑰方持有 r 的線性函數值即可；或用 ⟨r,y⟩ = 對 r 的線性雜湊）。具體地：Enc 時對每個「將來可能的 y」……y 空間指數大，不能枚舉——需要用結構：令量子部分為 UE.Enc(k_id, s)、r = G(s)，sk_y 給 (ipfe.sk_y, K)，解密者解出 s 後重建 r 並算 ⟨r,y⟩——又回到洩漏 x。**誠實結論：坑 1 是 P1 最硬的一塊**，目前最乾淨的出路是**把功能性弱化為「單金鑰或有界金鑰 per 密文」，或接受解密者學到 r（等價於：這是『unclonable one-time-programmable IPFE』——每份密文只保護到第一次解密前）**；或者第四個方向：用 **FE 本身遞迴**（量子部分放 IPFE₂.Enc(r) 而 sk_y 含 IPFE₂.KeyGen(y)，UE 只包 IPFE₂ 的解密能力）——這開始長得像 MM24 的 trojan 結構，值得跟老師討論。把此坑寫清楚本身就是論文的 technical core。
 - **坑 2：UE 選型（長訊息、unclonable-IND、可實例化）。** 需要對 n·⌈log q⌉ bit 訊息的 unclonable-IND UE。選項：AKLL22（QROM、BB84 態——與 AKL23 cloning games 銜接最順）；BBC26 不可複製位元 + HKNY24 明文擴展 / BG26b boosting（假設最弱，但見 §3.2 的效率警告）；AKY24（標準模型但量子金鑰 → sk_y 變量子態）。建議第一個定理用 QROM 版（故事最乾淨），把「換 UE 實例化」做成表格化的 corollary。
 - **坑 3：q-ary 對齊。** UE 文獻是 bit 訊息；r ∈ Z_q^n 需要逐符號編碼與 hybrid，unclonable-IND 的 multi-bit hybrid 論證在 UE 這邊**不是**標準的（cloning 遊戲下 hybrid argument 出了名的麻煩——survey 裡 CGKNY26 整篇就在處理這類問題），需要檢查或引用現成的 multi-bit 擴展（HKNY24）。
 
@@ -154,16 +156,16 @@ Dec(sk_y, ct): 由 K 導出 k_id；r = UE.Dec(k_id, ρ_UE)
 
 | # | 難點 | 擊中路徑 | 嚴重度 | 建議動作 |
 |---|------|----------|--------|----------|
-| D1 | Thm 7 lifting 消耗 universality：包裝電路 ∉ IPFE 類 | P2 | ★★★（結構性） | C_Dec hardcode 驗證（兩週任務）；或改走 P1 |
-| D2 | P1 坑 1：合法解密者經 r 學到超過 ⟨x,y⟩ 的資訊 | P1 | ★★★（目前 P1 最硬） | 四個修正方向見 §3.1；先做單金鑰版保底；與老師討論遞迴 FE 結構 |
-| D3 | IPFE 的 SIM-security 天花板（AGVW13 不可能性；ALS16 僅 IND） | P2 | ★★ | 用 ALMT20 單金鑰 adaptive SIM 續命；長期 IND 化 |
-| D4 | 可逆性洩漏攻擊 | P3、(II) | ★★★（對直構致命） | 轉化為 no-go observation（可交付） |
-| D5 | UEQ 介面：poly 解密電路描述、同 randomness 雙生成、可 teleport 純態金鑰 | P1、P2 | ★★ | 精讀 AKY24 確認每一項；BBC26 不滿足效率項 |
-| D6 | BBC26 無有效構造（Haar 酉），ideal-UE 替換不是 free | P2 加分項 | ★★ | 降級為 conditional result；追蹤 design/PRU 橋接文獻 |
-| D7 | 量子端 admissibility（Def 25）與 2-player IND（Def 30）的 plumbing 重走 | P1、P2 | ★★ | 精讀 MM24 Appendix A.2 + Def 25；P1 版遊戲先寫死不含糾纏訊息的特例 |
-| D8 | multi-bit / q-ary UE 的 hybrid 論證在 cloning 遊戲下非標準 | P1 | ★★ | 引 HKNY24 明文擴展或 AKLL22 multi-bit；不行就自己證（CGKNY26 有工具） |
-| D9 | 抗合謀語義三分：多古典 FE 金鑰（IPFE 端免費）vs 多 UFE 金鑰對（Def 26 的 B/C）vs 多密文拷貝（CGKNY26） | 全部 | ★ | 論文裡開一節把三者定義切開，本身是貢獻 |
-| D10 | 效率主張要能兌現（lattice 參數、密文尺寸帳） | P1、P2 | ★ | K9 補課；寫 comparison table 時再精算 |
+| D1 | Thm 7 lifting 消耗 universality：包裝電路 ∉ IPFE 類 | P2 | 高（結構性） | C_Dec hardcode 驗證（兩週任務）；或改走 P1 |
+| D2 | P1 坑 1：合法解密者經 r 學到超過 ⟨x,y⟩ 的資訊 | P1 | 高（目前 P1 最硬） | 四個修正方向見 §3.1；先做單金鑰版保底；與老師討論遞迴 FE 結構 |
+| D3 | IPFE 的 SIM-security 天花板（AGVW13 不可能性；ALS16 僅 IND） | P2 | 中 | 用 ALMT20 單金鑰 adaptive SIM 續命；長期 IND 化 |
+| D4 | 可逆性洩漏攻擊 | P3、(II) | 高（對直構致命） | 轉化為 no-go observation（可交付） |
+| D5 | UEQ 介面：poly 解密電路描述、同 randomness 雙生成、可 teleport 純態金鑰 | P1、P2 | 中 | 精讀 AKY24 確認每一項；BBC26 不滿足效率項 |
+| D6 | BBC26 無有效構造（Haar 酉），ideal-UE 替換不是 free | P2 加分項 | 中 | 降級為 conditional result；追蹤 design/PRU 橋接文獻 |
+| D7 | 量子端 admissibility（Def 25）與 2-player IND（Def 30）的 plumbing 重走 | P1、P2 | 中 | 精讀 MM24 Appendix A.2 + Def 25；P1 版遊戲先寫死不含糾纏訊息的特例 |
+| D8 | multi-bit / q-ary UE 的 hybrid 論證在 cloning 遊戲下非標準 | P1 | 中 | 引 HKNY24 明文擴展或 AKLL22 multi-bit；不行就自己證（CGKNY26 有工具） |
+| D9 | 抗合謀語義三分：多古典 FE 金鑰（IPFE 端免費）vs 多 UFE 金鑰對（Def 26 的 B/C）vs 多密文拷貝（CGKNY26） | 全部 | 低 | 論文裡開一節把三者定義切開，本身是貢獻 |
+| D10 | 效率主張要能兌現（lattice 參數、密文尺寸帳） | P1、P2 | 低 | K9 補課；寫 comparison table 時再精算 |
 
 ---
 
@@ -177,7 +179,7 @@ Dec(sk_y, ct): 由 K 導出 k_id；r = UE.Dec(k_id, ρ_UE)
 |---|------|------|----------|------|
 | K1 | Pauli/Clifford/stabilizer 形式主義、quantum teleportation、gate teleportation | Nielsen-Chuang §4.2–4.3、§10.5；Gottesman 講義 | 能手推 C·X^aZ^b·C† 的 pad 更新規則（對 H、CNOT、S 逐一算）；能寫出 teleport 一個態經過 EPR pair 的修正傳播 | P3 攻擊、D1、D4 |
 | K2 | QOTP 上的加密計算（Clifford 免費、T 要 gadget） | Broadbent-Jeffery (CRYPTO 2015)；Dulek-Schaffner-Speelman (CRYPTO 2016) | 能解釋 BJ15 的 CL scheme 為何安全、且為何同樣結構搬到 FE 就出現 §3.3 攻擊 | P3、(II) |
-| K3 | AK21 的可重用性轉換與 unclonable-IND 定義 | 已讀 ✓，回頭精讀 reusability 那節與 Def 16/18 對照 | 能複述 PRF 技巧如何把 one-time UE 變 reusable；能寫出 unclonable-IND 遊戲的形式化 | P1 坑 1、坑 2 |
+| K3 | AK21 的可重用性轉換與 unclonable-IND 定義 | 已讀，回頭精讀 reusability 那節與 Def 16/18 對照 | 能複述 PRF 技巧如何把 one-time UE 變 reusable；能寫出 unclonable-IND 遊戲的形式化 | P1 坑 1、坑 2 |
 | K4 | MM24 的 Def 25（admissibility）、Def 30（2-player IND）、Appendix A/B | mm24 原文 | 能把 Def 26 特化到 (I) 語義並自己寫出 P1 的安全遊戲定義 | D7 |
 
 ### 動手中精讀
@@ -194,7 +196,7 @@ Dec(sk_y, ct): 由 K 導出 k_id；r = UE.Dec(k_id, ρ_UE)
 
 | # | 主題 | 材料 | 對應 |
 |---|------|------|------|
-| K10 | MoE 遊戲的平行/XOR 重複 | AKL23（已讀 ✓）+ arXiv:2509.01831（ITCS 2026） | D8 若需自證 multi-symbol bound |
+| K10 | MoE 遊戲的平行/XOR 重複 | AKL23（已讀）+ arXiv:2509.01831（ITCS 2026） | D8 若需自證 multi-symbol bound |
 | K11 | lattice 參數估計 | lattice-estimator 工具 + ALS16 參數節 | D10 |
 | K12 | HKNY24 明文擴展、BG26b boosting、CGKNY26 multi-copy | survey 報告文獻表 | P1 實例化表、D8、D9 |
 

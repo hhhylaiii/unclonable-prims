@@ -1,5 +1,11 @@
 # AK21 精讀與 PQC 槽替換品總盤點：「最適合的替換品」已有答案，方向需要轉向
 
+> **狀態（2026-08-01）：現行有效，且是主軸 W1 的出處**（§4+ 提出的 W1 = unclonable IBE 已定案為碩論主軸，見 [W1 路線圖](./Route_W1_Unclonable_IBE_Roadmap.md)）。三處需注意：
+> 1. **§5.3 的建議（「主軸放路線甲」）已被推翻**——主軸是 W1，路線甲降為備援。
+> 2. **§6 引用錯誤**：[HMNY21] 的發表處是 **ASIACRYPT 2021**（全名 *Quantum Encryption with Certified Deletion, Revisited: Public Key, Attribute-Based, and Classical Communication*），非 TCC 2021；連帶 §3.3「與 AK21 同年同會」應改為「同年、不同會議」。
+> 3. **§4+.3 對 W1 的零件描述已細化**：後量子選項是原論文 **Thm 3 取 X = LWE**，且是 **adaptive** 安全（非 selective）、密文尺寸含 poly(T) 因子。詳見路線圖 §3–§4。
+> 4. **§4+.2/§4+.3 的「零量子應用」需精確化**：對 RNC-IBE 這篇論文成立，但非承諾 IBE／ABE 這個概念本來就是 HMNY21 為了憑證刪除（量子應用）而引入的——**競速風險應上調**。
+>
 > **日期**：2026-07-12
 > **任務**：逐頁精讀《Unclonable Encryption, Revisited》（AK21，TCC 2021）全文，抽出「PQC 槽」在證明中真正消耗的介面，並 survey 所有候選替換品，回答「換成什麼最適合」。
 > **一句話結論**：**「最適合」的替換品是 RNCE（接收者非承諾加密）——這個答案是對的，對到 Hiroka-Kitagawa-Nishimaki-Yamakawa 已於 2023 年 12 月把它寫進論文附錄（[HKNY24] arXiv:2311.09487, TCC 2024, Appendix E），連 unclonable-IND 的保持都一併證了。** 白板線（重構 UE）的低垂果實已被摘走，repo 既有三份報告均未察覺此事。本文記錄精讀結果、查證證據、剩餘真空格，並給出方向轉向建議。
@@ -102,7 +108,7 @@ Hiroka, Kitagawa, Nishimaki, Yamakawa，《Robust Combiners and Universal Constr
 
 ### 3.3 同配方族譜（為什麼這格被 NTT 團隊佔走是自然的）
 
-`量子編碼 + 古典可模糊化元件` 這個配方在他們手上已連做三次：HMNY21（BB84 + RNCE ⇒ 憑證刪除 PKE，TCC 2021——與 AK21 同年同會）→ HKNY24 App E（otUE + RNCE ⇒ unclonable PKE）→ 其 SKL 系列（KMY25 等）。survey 報告「SKL 流派一原語一論文」的觀察在 UE 這格同樣成立，只是成果藏在附錄。
+`量子編碼 + 古典可模糊化元件` 這個配方在他們手上已連做三次：HMNY21（BB84 + RNCE ⇒ 憑證刪除 PKE／ABE，**ASIACRYPT 2021**——與 AK21 同年、不同會議）→ HKNY24 App E（otUE + RNCE ⇒ unclonable PKE）→ 其 SKL 系列（KMY25 等）。survey 報告「SKL 流派一原語一論文」的觀察在 UE 這格同樣成立，只是成果藏在附錄。
 
 ---
 
@@ -160,7 +166,7 @@ Hiroka, Kitagawa, Nishimaki, Yamakawa，《Robust Combiners and Universal Constr
 
 | # | 槽內容物 → 輸出 | 材料現況 | 評估 |
 |---|---|---|---|
-| **W1 ★** | **RNC-IBE → Unclonable IBE**：`ct = (RNCIBE.Enc(mpk, id, k_UE), otUE.Enc(k_UE, m))` | RNC-IBE 剛出爐（Goyal-Kitagawa-Koppula-Nishimaki-Rajasree-Yamakawa，**PKC 2025**）；查證其應用清單**只有 incompressible IBE、零量子應用**；「unclonable IBE」一詞文獻中不存在 | **首選**。證明 = HKNY24 App E 模板 + IBE 金鑰查詢 hybrid。實質工作（不是白撿）：(a) RNC-IBE 主構造用 bilinear（**非 pq**），pq 版是 relaxed（DDH/LWE、**多項式大小 identity space**）——第一定理接受 poly-ID，或自造 LWE 上 selective RNC-IBE（GPV/ABB＋可模糊化）當技術核心；(b) unclonable IBE 的 cloning game 定義（金鑰查詢在 split 前後的給法）；(c) 與 KN23 一對多概念的分離/比較。競速風險：NTT+Goyal 產線自己補量子應用 |
+| **W1（首選）** | **RNC-IBE → Unclonable IBE**：`ct = (RNCIBE.Enc(mpk, id, k_UE), otUE.Enc(k_UE, m))` | RNC-IBE 剛出爐（Goyal-Kitagawa-Koppula-Nishimaki-Rajasree-Yamakawa，**PKC 2025**）；查證其應用清單**只有 incompressible IBE、零量子應用**；「unclonable IBE」一詞文獻中不存在 | **首選**。證明 = HKNY24 App E 模板 + IBE 金鑰查詢 hybrid。實質工作（不是白撿）：(a) RNC-IBE 主構造用 bilinear（**非 pq**），pq 版是 relaxed（DDH/LWE、**多項式大小 identity space**）——第一定理接受 poly-ID，或自造 LWE 上 selective RNC-IBE（GPV/ABB＋可模糊化）當技術核心；(b) unclonable IBE 的 cloning game 定義（金鑰查詢在 split 前後的給法）；(c) 與 KN23 一對多概念的分離/比較。競速風險：NTT+Goyal 產線自己補量子應用 |
 | W2 | NC-RFE / equivocal LWE → **Registered unclonable encryption** | Sarkar ePrint 2026/1293（AFRICACRYPT 2026）元件現成 | 去信任機構＋不可複製的組合尚空，但 2603.07646 顯示鄰域已有人；registered 機制本身複雜度高。次選 |
 | W3 | SKL-PKE ＋ NC 性質 → **UE with secure key leasing** | KMY25 框架（EUROCRYPT 2025）現成；「SKL 方案的 NC 化」需自行驗證 | 密文不可複製 × 金鑰可租回，雙量子生命週期的乘積題；SKL 產線風格，故事清楚。中風險 |
 | W4 | NC＋CCA 古典組合 → **CCA-secure UE** | 古典 NCE+CCA 已知 | 定義＋compiler，低風險低新穎；附章料 |
@@ -205,7 +211,7 @@ Hiroka, Kitagawa, Nishimaki, Yamakawa，《Robust Combiners and Universal Constr
 
 - **[AK21]** Ananth, Kaleoglu. *Unclonable Encryption, Revisited*. TCC 2021. ePrint 2021/412 / arXiv:2103.15009.（全文精讀：Def 7–16、Thm 6–8、§4.2.1/§5.1.1 證明、§6 ROMG、§7 copy-protection）
 - **[HKNY24]** Hiroka, Kitagawa, Nishimaki, Yamakawa. *Robust Combiners and Universal Constructions for Quantum Cryptography*. arXiv:2311.09487 (v2, 2023-12), TCC 2024. **Appendix E**（本次發現的關鍵）；另含 §7 UE combiner、§8 明文擴展（survey 原記錄）。
-- **[HMNY21]** Hiroka, Morimae, Nishimaki, Yamakawa. *Quantum Encryption with Certified Deletion, Revisited*. TCC 2021.（RNCE+BB84 配方的先例；HKNY24 App E 自承基於其技術）
+- **[HMNY21]** Hiroka, Morimae, Nishimaki, Yamakawa. *Quantum Encryption with Certified Deletion, Revisited: Public Key, Attribute-Based, and Classical Communication*. **ASIACRYPT 2021**.（RNCE+BB84 配方的先例；HKNY24 App E 自承基於其技術；**NC-ABE 亦出自此文**，用 iO——見 W1 路線圖 §6 C1/C2）
 - **[AKLL22]** Ananth, Kaleoglu, Li, Liu, Zhandry. *On the Feasibility of Unclonable Encryption, and More*. CRYPTO 2022. arXiv:2207.06589.（unclonable-IND 僅 QROM——compiler 的 one-time 原料現況）
 - **[SS10, GVW12]** 單金鑰 FE ⇐ PKE（AK21 §2.4 Instantiations）。
 - **[HJO+16]** somewhere equivocal encryption（AK21 腳註 5）。
