@@ -44,6 +44,8 @@ Enc(mpk, id, m):  k ← otUE.Setup
 
 - [路線 W1 技術路線圖：Unclonable IBE](./Reports/Route_W1_Unclonable_IBE_Roadmap.md)
   — **現行主軸文件**。目標原語語義、定義設計的五個維度（A1–A5）、構造與主定理形狀、三段證明骨架與唯一硬點 D-W1、RNC-IBE 精讀的關鍵發現（Def 6 交出的是 msk）、後量子零件的兩案並陳、與 KN23／HMNY21 的邊界、執行計畫與退場條件。**（想知道現在在做什麼，只讀這一份）**
+- [Meeting 討論筆記：RNC-IBE 精讀（2026-08）](./Reports/Meeting_2026-08_W1_RNCIBE_Discussion.md)
+  — 下次個人 meeting 的討論素材：RNC-IBE 精讀長出的五個討論點（介面對上、Def 6 給 msk、D-W1、後量子零件實況、KEM 介面）、四個待拍板問題（混淆電路的範圍、pq 策略、定義取捨、佔位時機）與論文閱讀範圍表。
 - [Meeting 討論報告：兩條候選主軸（2026-07-15）](./Reports/Meeting_2026-07-15_Two_Routes_Discussion.md)
   — 給老師的 high-level 討論文件：Unclonable IPFE 與 Unclonable IBE 兩條路線各自「要做什麼、為什麼可以、大概的方式」、兩線對照表、三個論文骨架選項與待拍板問題清單。（歷史紀錄：主軸已於 2026-08-01 定案為 W1，其 §4 的骨架選項由路線圖取代）
 - [不可複製加密的論文方向：五個研究前沿](./Reports/Research_Directions_of_Unclonable_Encryption.md)

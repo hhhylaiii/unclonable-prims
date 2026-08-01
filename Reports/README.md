@@ -20,6 +20,7 @@
 | 暱稱 | 檔案 | 日期 | 狀態 |
 |---|---|---|---|
 | **W1 路線圖** | [Route_W1_Unclonable_IBE_Roadmap.md](./Route_W1_Unclonable_IBE_Roadmap.md) | 2026-08-01 | **現行主軸文件**（定義維度 A1–A5、主定理、證明骨架與 D-W1、RNC-IBE 精讀、pq 兩案、執行計畫。其 §6 更正了 HMNY21 的發表處與「零量子應用」的說法） |
+| **2026-08 Meeting 筆記** | [Meeting_2026-08_W1_RNCIBE_Discussion.md](./Meeting_2026-08_W1_RNCIBE_Discussion.md) | 2026-08-01 | 現行（meeting 用：RNC-IBE 精讀的五個討論點、四個待拍板問題、論文閱讀範圍。「混淆電路的範圍」建議開場先問——它是唯一可能翻掉後量子路徑的變數） |
 | **Meeting 討論報告** | [Meeting_2026-07-15_Two_Routes_Discussion.md](./Meeting_2026-07-15_Two_Routes_Discussion.md) | 2026-07-13 | 歷史紀錄：兩線並列的討論定稿。**§4 的三個骨架選項已由 W1 路線圖取代**（主軸定為 W1）；§1–§3 的背景與兩線描述仍有效 |
 | QFE survey | [Research_Directions_of_Quantum_Functional_Encryption.md](./Research_Directions_of_Quantum_Functional_Encryption.md) | 2026-05 | 部分過時：方向 1 直構想法被 D4 攻擊否定；Project B/C 判斷已由深度分析更新 |
 | 五方向報告 | [Research_Directions_of_Unclonable_Encryption.md](./Research_Directions_of_Unclonable_Encryption.md) | 2026-05 | 部分過時：方向一/三的新穎性判斷被 HKNY24 App E 推翻；方向五結果端被 CGKNY26 拿走 |
