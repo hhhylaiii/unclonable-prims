@@ -1,6 +1,6 @@
 # 白板解碼：AK21 的「otUE + PQC」混合配方，與「換掉 PQC、重構一個 UE」的可行方向
 
-> ⚠️ **v3 更正（2026-07-12 深入查證後）**：本文 §3 的 R1（公鑰偽金鑰不經 FE，標為「5 年 open、主推」）與 R3（unclonable-IND 版 compiler，標為「檢查點」）的新穎性判斷**已被推翻**——[HKNY24]（arXiv:2311.09487，TCC 2024）Appendix E 已用 RNCE 構造 unclonable PKE 並證明 unclonable-IND 保持。剩餘真空與修訂後的方向建議見 `AK21_Close_Reading_and_PQC_Slot_Survey.md`。R2 的「統一刻畫」部分（該報告的 V1）仍存活。
+> **v3 更正（2026-07-12 深入查證後）**：本文 §3 的 R1（公鑰偽金鑰不經 FE，標為「5 年 open、主推」）與 R3（unclonable-IND 版 compiler，標為「檢查點」）的新穎性判斷**已被推翻**——[HKNY24]（arXiv:2311.09487，TCC 2024）Appendix E 已用 RNCE 構造 unclonable PKE 並證明 unclonable-IND 保持。剩餘真空與修訂後的方向建議見 `AK21_Close_Reading_and_PQC_Slot_Survey.md`。R2 的「統一刻畫」部分（該報告的 V1）仍存活。
 > **日期**：2026-07-12（v2，同日修訂）
 > **修訂註記**：v1 把白板公式讀成路線甲（unclonable IPFE）的前奏，過度綁定。經確認，老師白板的意圖是**重新構造一個 UE**——換掉 AK21 配方裡的古典槽，輸出物仍然是 UE 本身，而不是把配方推廣成新原語。本版以此讀法為主軸重寫；與路線甲的關係降為 §4 的對照節。
 > **緣起**：老師最初講解本方向時在白板寫下「Unclonable Encryption … otUE + PQC … revisited」，並把 PQC 框起來。本文回答：(1) 白板公式的精確出處與含義；(2) 在「輸出仍是 UE」的前提下，「把 PQC 換成其他的」還有哪些可做的方向。
