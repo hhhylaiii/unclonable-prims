@@ -1,6 +1,6 @@
-# AK21 精讀與 PQC 槽替換品總盤點：「最適合的替換品」已有答案，方向需要轉向
+# AK21 逐頁精讀與槽位替換品盤點：證明真正消耗的介面 E1–E4、HKNY24 App E 已先行做掉的查證、剩餘真空格 V1–V3 與第二輪候選 W1–W6
 
-> **狀態（2026-08-01）：現行有效，且是主軸 W1 的出處**（§4+ 提出的 W1 = unclonable IBE 已定案為碩論主軸，見 [W1 路線圖](./Route_W1_Unclonable_IBE_Roadmap.md)）。三處需注意：
+> **狀態（2026-08-01）：現行有效，且是主軸 W1 的出處**（§4+ 提出的 W1 = unclonable IBE 已定案為碩論主軸，見 [W1 路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)）。三處需注意：
 > 1. **§5.3 的建議（「主軸放路線甲」）已被推翻**——主軸是 W1，路線甲降為備援。
 > 2. **§6 引用錯誤**：[HMNY21] 的發表處是 **ASIACRYPT 2021**（全名 *Quantum Encryption with Certified Deletion, Revisited: Public Key, Attribute-Based, and Classical Communication*），非 TCC 2021；連帶 §3.3「與 AK21 同年同會」應改為「同年、不同會議」。
 > 3. **§4+.3 對 W1 的零件描述已細化**：後量子選項是原論文 **Thm 3 取 X = LWE**，且是 **adaptive** 安全（非 selective）、密文尺寸含 poly(T) 因子。詳見路線圖 §3–§4。

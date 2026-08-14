@@ -1,7 +1,7 @@
-# Meeting 討論筆記：RNC-IBE 精讀的五個討論點與待拍板問題
+# Meeting 筆記（2026-08）：RNC-IBE 介面核對的五個發現（E1–E4 對上、Def 6 給 msk、D-W1、後量子只剩一個構造、改用 KEM 介面）與三個待拍板問題
 
 > **整理日期**：2026-08-01
-> **技術細節**：見[路線 W1 技術路線圖](./Route_W1_Unclonable_IBE_Roadmap.md)。
+> **技術細節**：見[路線 W1 技術路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)。
 
 ---
 

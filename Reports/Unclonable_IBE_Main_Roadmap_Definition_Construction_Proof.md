@@ -1,8 +1,8 @@
-# 路線 W1 技術路線圖：Unclonable IBE
+# Unclonable IBE 主軸路線圖：定義設計五維度、KEM-DEM 構造與主定理、三段證明骨架與硬點 D-W1、後量子零件兩案
 
 > **日期**：2026-08-01
 > **狀態**：**現行主軸**。碩論方向已定案為 W1（不可複製身分基加密），本文取代 Meeting 報告 §4 的「三個骨架選項」，成為主軸的技術總圖。
-> **前身**：本路線在 [AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md) §4+ 首次提出（編號 W1），在 [Meeting 討論報告](./Meeting_2026-07-15_Two_Routes_Discussion.md) §3 以「路線二」與 Unclonable IPFE 並列。現在並列狀態結束。
+> **前身**：本路線在 [AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md) §4+ 首次提出（編號 W1），在 [Meeting 討論報告](./Meeting_2026-07_Two_Candidate_Routes_IPFE_vs_IBE.md) §3 以「路線二」與 Unclonable IPFE 並列。現在並列狀態結束。
 > **一句話**：把 AK21／HKNY24 的 KEM-DEM 配方裡的古典槽換成 RNC-IBE，得到文獻中不存在的 unclonable IBE；證明套 HKNY24 App E 模板，實質工作在定義設計與後量子零件。
 
 ---
@@ -252,4 +252,4 @@ Thm 3 取 X = LWE：adaptive 安全、mpk compact、後量子、且有 §3.4 的
 
 ---
 
-> **相關報告**：[AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md)（W1 的提出與槽位介面 E1–E4）｜[Meeting 討論報告](./Meeting_2026-07-15_Two_Routes_Discussion.md)（兩線對照的歷史紀錄）｜[路線甲 Deep Dive](./Deep_Dive_Route_A_Unclonable_IPFE.md)（已降為備援）｜[Reports 閱讀指南](./README.md)
+> **相關報告**：[定義章草稿](./Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md)（本文 §1–§2 的細化：定義風格分層、模擬器對應、Definition A/B）｜[AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md)（W1 的提出與槽位介面 E1–E4）｜[Meeting 討論報告](./Meeting_2026-07_Two_Candidate_Routes_IPFE_vs_IBE.md)（兩線對照的歷史紀錄）｜[路線甲 Deep Dive](./Unclonable_IPFE_Backup_Route_Paths_Obstacles_Knowledge_Gaps.md)（已降為備援）｜[Reports 閱讀指南](./README.md)

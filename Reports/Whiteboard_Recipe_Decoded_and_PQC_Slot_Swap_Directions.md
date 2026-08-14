@@ -1,6 +1,6 @@
-# 白板解碼：AK21 的「otUE + PQC」混合配方，與「換掉 PQC、重構一個 UE」的可行方向
+# 白板配方解碼：「otUE + PQC」對應到 AK21 §1.2 的混合構造、PQC 槽的真實介面、四個換槽方向 R1–R4 與白板線／路線甲的分界
 
-> **v3 更正（2026-07-12 深入查證後）**：本文 §3 的 R1（公鑰偽金鑰不經 FE，標為「5 年 open、主推」）與 R3（unclonable-IND 版 compiler，標為「檢查點」）的新穎性判斷**已被推翻**——[HKNY24]（arXiv:2311.09487，TCC 2024）Appendix E 已用 RNCE 構造 unclonable PKE 並證明 unclonable-IND 保持。剩餘真空與修訂後的方向建議見 `AK21_Close_Reading_and_PQC_Slot_Survey.md`。R2 的「統一刻畫」部分（該報告的 V1）仍存活。
+> **v3 更正（2026-07-12 深入查證後）**：本文 §3 的 R1（公鑰偽金鑰不經 FE，標為「5 年 open、主推」）與 R3（unclonable-IND 版 compiler，標為「檢查點」）的新穎性判斷**已被推翻**——[HKNY24]（arXiv:2311.09487，TCC 2024）Appendix E 已用 RNCE 構造 unclonable PKE 並證明 unclonable-IND 保持。剩餘真空與修訂後的方向建議見 `AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md`。R2 的「統一刻畫」部分（該報告的 V1）仍存活。
 > **日期**：2026-07-12（v2，同日修訂）
 > **修訂註記**：v1 把白板公式讀成路線甲（unclonable IPFE）的前奏，過度綁定。經確認，老師白板的意圖是**重新構造一個 UE**——換掉 AK21 配方裡的古典槽，輸出物仍然是 UE 本身，而不是把配方推廣成新原語。本版以此讀法為主軸重寫；與路線甲的關係降為 §4 的對照節。
 > **緣起**：老師最初講解本方向時在白板寫下「Unclonable Encryption … otUE + PQC … revisited」，並把 PQC 框起來。本文回答：(1) 白板公式的精確出處與含義；(2) 在「輸出仍是 UE」的前提下，「把 PQC 換成其他的」還有哪些可做的方向。
@@ -121,7 +121,7 @@ AK21 的定理只對 unclonability（搜尋型安全）陳述。強概念 unclon
 | 源頭 | 老師最初白板（AK21 配方） | 報告完 MM24 後老師的「升級階梯」討論 |
 | 輸出物 | **一個新的 UE 構造**（更輕的公鑰路徑／更一般的 compiler／更強安全概念） | **一個新原語**：unclonable IPFE |
 | 對應 README 路徑 | 路徑 2 + 3 | 路徑 1 |
-| 地圖文件 | 偽金鑰報告 + 五方向報告（方向一/三/五） | Deep_Dive_Route_A + QFE survey |
+| 地圖文件 | 偽金鑰報告 + 五方向報告（方向一/三/五） | 路線甲深度分析 + QFE survey |
 
 **為什麼白板公式不能直接通到路線甲**：若把 IPFE 放進 PQC 槽而輸出仍要是 UE，功能金鑰 sk_y 會從古典部分解出 ⟨k_otUE, y⟩——洩漏一次性金鑰的線性函數，UE 安全性反而被 FE 的功能性破壞；要讓 IPFE 的功能性有意義，就必須把目標原語從 UE 換成 FE、並把訊息載荷搬到古典側（`IPFE.Enc(x+r) ⊗ UE.Enc(r)`）——那一步就離開白板線、進入路線甲了。**這個「一放進 FE 就被迫改目標」的觀察，正說明兩條線是真正不同的題目。**
 
@@ -144,7 +144,7 @@ AK21 的定理只對 unclonability（搜尋型安全）陳述。強概念 unclon
 
 ### 若確認是 (b)，沿用路線甲
 
-Deep_Dive_Route_A 的 12–16 週計畫與三個既有問題照舊，本文 §4 的對照表可當開場圖。
+路線甲深度分析的 12–16 週計畫與三個既有問題照舊，本文 §4 的對照表可當開場圖。
 
 ### 誠實的風險對照
 
@@ -164,4 +164,4 @@ Deep_Dive_Route_A 的 12–16 週計畫與三個既有問題照舊，本文 §4 
 - **[CG24]** Coladangelo, Gunn. STOC 2024.（cUE——概念相近的部分進展）
 - **[AKLL22]** Ananth, Kaleoglu, Li, Liu, Zhandry. CRYPTO 2022.（QROM unclonable-IND；R3 的查證對象）
 - **[CGKNY26]** *Multi-Copy Security in Unclonable Cryptography*. CRYPTO 2026.（R4 的對照組）
-- 其餘見 `public_key_encryption_with_fake-key_property_report.md`、`Research_Directions_of_Unclonable_Encryption.md` 與 `Survey_Recent_Developments_and_New_Routes_2026-07.md`。
+- 其餘見 `Fake_Key_Property_Why_No_Public_Key_Version_Exists.md`、`Unclonable_Encryption_Five_Research_Frontiers_Map.md` 與 `Literature_Survey_2026-07_Results_Gaps_and_Route_Ranking.md`。

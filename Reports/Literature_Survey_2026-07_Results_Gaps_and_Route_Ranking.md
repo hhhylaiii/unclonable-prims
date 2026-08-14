@@ -1,8 +1,8 @@
-# 2026 年 7 月文獻總盤點：近期發展與可著手的研究路線
+# 文獻總盤點（2026-07）：MM24 之後的最新結果（不可能性、不可複製位元、HROM UE、多複製安全）、空白區與擁擠區地圖、五條候選路線的優先序
 
 > **更正註記（2026-07-12/13，兩則）**：
-> 1. **HKNY24 Appendix E 被本報告漏掉**——§2.2 記錄的「HKNY24 明文擴展」與 §2.5 記錄的「RNCE with quantum ciphertexts（arXiv:2311.09487）」其實是**同一篇論文**，且其 Appendix E 已用 RNCE 從 one-time unclonable SKE + PKE 構造出公鑰 UE、並證明 unclonable-IND 保持。因此 §2.5 的「公鑰偽金鑰性質仍無人做」與 §三空白區表的對應格子需修正：字面定義仍空，但實質內容已被做掉。詳見 [AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md) §3。
-> 2. **路線甲描述中的「Clifford-QOTP 直接構造想法」已被否定**——[路線甲深度分析](./Deep_Dive_Route_A_Unclonable_IPFE.md) §3.3 發現可逆性洩漏攻擊（L_C 可逆 ⇒ 解密者可逆推 pad、直接取回 ρ），該想法已從構造候選轉為 no-go observation。
+> 1. **HKNY24 Appendix E 被本報告漏掉**——§2.2 記錄的「HKNY24 明文擴展」與 §2.5 記錄的「RNCE with quantum ciphertexts（arXiv:2311.09487）」其實是**同一篇論文**，且其 Appendix E 已用 RNCE 從 one-time unclonable SKE + PKE 構造出公鑰 UE、並證明 unclonable-IND 保持。因此 §2.5 的「公鑰偽金鑰性質仍無人做」與 §三空白區表的對應格子需修正：字面定義仍空，但實質內容已被做掉。詳見 [AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md) §3。
+> 2. **路線甲描述中的「Clifford-QOTP 直接構造想法」已被否定**——[路線甲深度分析](./Unclonable_IPFE_Backup_Route_Paths_Obstacles_Knowledge_Gaps.md) §3.3 發現可逆性洩漏攻擊（L_C 可逆 ⇒ 解密者可逆推 pad、直接取回 ρ），該想法已從構造候選轉為 no-go observation。
 >
 > **Survey 日期**：2026-07-10
 > **方法**：以已精讀的四篇論文為錨點——[AK21]《Unclonable Encryption, Revisited》、[AKL23]《Cloning Games》、[MM24]《Unclonable Functional Encryption》、[ABDP15]《Simple FE for Inner Products》——向外檢索 2024 年 10 月（MM24 發表）之後的所有相關文獻，重點放在 2025 下半年至 2026 年 7 月的最新結果。

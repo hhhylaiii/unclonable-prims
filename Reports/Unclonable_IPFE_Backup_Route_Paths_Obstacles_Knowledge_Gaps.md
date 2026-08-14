@@ -1,8 +1,8 @@
-# 路線甲深度分析：從 IPFE 到 Unclonable IPFE——技術路徑、難點地圖與知識補完清單
+# Unclonable IPFE 備援路線深潛：目標語義釘死、MM24 三定理的介面需求、三條技術路徑 P1–P3、難點總表 D1–D10 與知識補完清單 K1–K12
 
-> **狀態變更（2026-08-01）：本路線已降為備援／延伸章。** 碩論主軸定案為 **W1（Unclonable IBE）**，見 [W1 路線圖](./Route_W1_Unclonable_IBE_Roadmap.md)。本文的技術內容（P1–P3、D1–D10、K1–K12）**全部仍然有效**，用途改為：(a) W1 撞牆時的退路；(b) 論文的延伸章／future work；(c) §3.3 的 Clifford 直構 no-go observation 是隨時可交付的 2–3 頁短文。§6 的 12–16 週執行計畫暫不啟動。
+> **狀態變更（2026-08-01）：本路線已降為備援／延伸章。** 碩論主軸定案為 **W1（Unclonable IBE）**，見 [W1 路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)。本文的技術內容（P1–P3、D1–D10、K1–K12）**全部仍然有效**，用途改為：(a) W1 撞牆時的退路；(b) 論文的延伸章／future work；(c) §3.3 的 Clifford 直構 no-go observation 是隨時可交付的 2–3 頁短文。§6 的 12–16 週執行計畫暫不啟動。
 >
-> **後續更新（2026-07-12）**：[AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md)發現 [HKNY24]（arXiv:2311.09487，TCC 2024）**Appendix E** 用 RNCE 從 one-time unclonable SKE + PKE 構造公鑰 UE（Lemma E.2 證 unclonable-IND 保持）。對本文的意義：**P1 的 UE 歸約段（「古典秘密附進 B/C register、reveal 後本地重建金鑰」的管線）有了現成的證明模板**（精讀報告 §5.2）；坑 3 / D8 需要的 multi-bit 擴展也在同一篇論文（§8 明文擴展）。本文其餘內容不受影響。
+> **後續更新（2026-07-12）**：[AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md)發現 [HKNY24]（arXiv:2311.09487，TCC 2024）**Appendix E** 用 RNCE 從 one-time unclonable SKE + PKE 構造公鑰 UE（Lemma E.2 證 unclonable-IND 保持）。對本文的意義：**P1 的 UE 歸約段（「古典秘密附進 B/C register、reveal 後本地重建金鑰」的管線）有了現成的證明模板**（精讀報告 §5.2）；坑 3 / D8 需要的 multi-bit 擴展也在同一篇論文（§8 明文擴展）。本文其餘內容不受影響。
 > **日期**：2026-07-10
 > **前提**：已決定主攻路線甲（把 MM24 升級階梯的底層換成 IPFE，最終 lift 成 unclonable 版本）。
 > **本文目的**：(1) 把「Unclonable IPFE for quantum messages」這個目標的語義釘死；(2) 逐條盤點 MM24 三個定理對底層元件的介面需求，找出換成 IPFE 之後哪裡會斷；(3) 給出三條具體技術路徑與各自的難點；(4) 列出需要補足的知識與驗收標準。
@@ -228,4 +228,4 @@ Dec(sk_y, ct): 由 K 導出 k_id；r = UE.Dec(k_id, ρ_UE)
 - **[BBC26]** Bhattacharyya, Broadbent, Culf. *The Uncloneable Bit Exists*. arXiv:2603.08916v2（2026-06）。本文確認：Haar-measure 加密、金鑰古典、strong uncloneable security（exp(−q)）、**無有效構造**（作者原文：「the scheme no longer admits an efficient construction」）。
 - **[AKLL22]** Ananth, Kaleoglu, Li, Liu, Zhandry. *On the Feasibility of Unclonable Encryption, and More*. CRYPTO 2022.（QROM unclonable-IND；P1 首選實例化）
 - **[HKNY24]** Hiroka, Kitagawa, Nishimaki, Yamakawa. *Robust Combiners and Universal Constructions for Quantum Cryptography*. arXiv:2311.09487, TCC 2024.（§8 明文擴展：bit → 任意長度，對應 D8；**Appendix E**：RNCE ⇒ unclonable PKE、Lemma E.2 保 unclonable-IND——P1 UE 歸約段的證明模板，見文首後續更新）
-- 其餘見 `Survey_Recent_Developments_and_New_Routes_2026-07.md` 文獻表。
+- 其餘見 `Literature_Survey_2026-07_Results_Gaps_and_Route_Ranking.md` 文獻表。

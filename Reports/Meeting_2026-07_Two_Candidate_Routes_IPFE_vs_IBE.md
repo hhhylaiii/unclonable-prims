@@ -1,6 +1,6 @@
-# 討論報告：兩條候選主軸——Unclonable IPFE 與 Unclonable IBE
+# Meeting 報告（2026-07）：Unclonable IPFE 與 Unclonable IBE 兩條候選主軸的做法、可行性、對照表與三個論文骨架選項
 
-> **狀態（2026-08-01）：歷史紀錄。主軸已定案為路線二（W1，Unclonable IBE）。** 本文 §4 的三個骨架選項與 §5 的待拍板問題已由 [W1 路線圖](./Route_W1_Unclonable_IBE_Roadmap.md) 取代（結果接近方案 B：W1 為主軸、路線一降為備援／延伸章）。§1–§3 的背景、槽位規則與兩線描述仍然有效，可作為 W1 的 high-level 導論。
+> **狀態（2026-08-01）：歷史紀錄。主軸已定案為路線二（W1，Unclonable IBE）。** 本文 §4 的三個骨架選項與 §5 的待拍板問題已由 [W1 路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md) 取代（結果接近方案 B：W1 為主軸、路線一降為備援／延伸章）。§1–§3 的背景、槽位規則與兩線描述仍然有效，可作為 W1 的 high-level 導論。
 >
 > **用途**：2026-07-15 與老師討論碩論主軸的 high-level 文件。本文只保留討論需要的高度；每個判斷的技術細節與查證證據見文末 §7 的出處對照。
 > **整理日期**：2026-07-13
@@ -190,10 +190,10 @@ Enc(mpk, id, m):  抽一次性金鑰 k
 
 | 本文內容 | 詳細出處 |
 |---|---|
-| 槽位介面刻畫（E1–E4）、HKNY24 App E 查證、白板線關閉 | [AK21 精讀報告](./AK21_Close_Reading_and_PQC_Slot_Survey.md) §2–§3 |
+| 槽位介面刻畫（E1–E4）、HKNY24 App E 查證、白板線關閉 | [AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md) §2–§3 |
 | 路線二（W1）評估、定理形狀、一般化主定理、剩餘格子 V1–V3 | 精讀報告 §4–§4+ |
-| P1 構造、洩漏 x 的張力（D2）與四個修正方向、12–16 週計畫 | [路線甲深度分析](./Deep_Dive_Route_A_Unclonable_IPFE.md) §3.1、§4、§6 |
+| P1 構造、洩漏 x 的張力（D2）與四個修正方向、12–16 週計畫 | [路線甲深度分析](./Unclonable_IPFE_Backup_Route_Paths_Obstacles_Knowledge_Gaps.md) §3.1、§4、§6 |
 | MM24 lifting 消耗 universality（D1）、Clifford no-go（D4） | 深度分析 §2、§3.3 |
-| MM24 引用地圖（零構造跟進）、BMMS26、空白區／擁擠區 | [7 月 survey](./Survey_Recent_Developments_and_New_Routes_2026-07.md) §2.1、§三 |
-| 白板線與路線甲「一放進 FE 就被迫改目標」的分界 | [白板報告 v3](./AK21_Hybrid_Recipe_and_PQC_Slot_Replacement.md) §4 |
+| MM24 引用地圖（零構造跟進）、BMMS26、空白區／擁擠區 | [7 月 survey](./Literature_Survey_2026-07_Results_Gaps_and_Route_Ranking.md) §2.1、§三 |
+| 白板線與路線甲「一放進 FE 就被迫改目標」的分界 | [白板報告 v3](./Whiteboard_Recipe_Decoded_and_PQC_Slot_Swap_Directions.md) §4 |
 | 各報告狀態與關鍵事實速查 | [Reports/README.md](./README.md) |

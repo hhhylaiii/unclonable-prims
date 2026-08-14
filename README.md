@@ -17,24 +17,24 @@ Enc(mpk, id, m):  k ← otUE.Setup
 
 當前決策點：後量子零件走「poly-ID 誠實起步」還是「自造 LWE 版 RNC-IBE 當技術核心」——**兩案並陳，待一週試探後拍板**。
 
-完整技術地圖見 **[路線 W1 技術路線圖](./Reports/Route_W1_Unclonable_IBE_Roadmap.md)（現行主軸文件）**。
+完整技術地圖見 **[Unclonable IBE 主軸路線圖](./Reports/Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)（現行主軸文件）**；定義章的細節見 **[Unclonable IBE 定義章草稿](./Reports/Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md)**。
 
 ### 其他線的狀態
 
-- **路線甲：Unclonable IPFE**（**降為備援／延伸章**）——把 MM24 升級階梯的底層換成受限 function class（inner product）。引用地圖確認零競爭者，但技術風險較高（D2：合法解密者經 r 洩漏 x）。保留為 W1 撞牆時的退路與論文延伸章；其副產品 Clifford 直構 no-go 短文仍是隨時可交付的成果。詳見[路線甲深度分析](./Reports/Deep_Dive_Route_A_Unclonable_IPFE.md)。
-- **白板線（原形已關閉）**：老師白板的「otUE + PQC 換槽」配方，其正解（RNCE 填槽、不經 FE 的公鑰 UE、unclonable-IND 保持）**已被 HKNY24（TCC 2024）Appendix E 先行做掉**。但第二輪盤點發現 **W1：unclonable IBE（RNC-IBE 填槽）** 這格全空——**現行主軸即由此長出**。詳見 [AK21 精讀報告](./Reports/AK21_Close_Reading_and_PQC_Slot_Survey.md)。
+- **路線甲：Unclonable IPFE**（**降為備援／延伸章**）——把 MM24 升級階梯的底層換成受限 function class（inner product）。引用地圖確認零競爭者，但技術風險較高（D2：合法解密者經 r 洩漏 x）。保留為 W1 撞牆時的退路與論文延伸章；其副產品 Clifford 直構 no-go 短文仍是隨時可交付的成果。詳見[路線甲深度分析](./Reports/Unclonable_IPFE_Backup_Route_Paths_Obstacles_Knowledge_Gaps.md)。
+- **白板線（原形已關閉）**：老師白板的「otUE + PQC 換槽」配方，其正解（RNCE 填槽、不經 FE 的公鑰 UE、unclonable-IND 保持）**已被 HKNY24（TCC 2024）Appendix E 先行做掉**。但第二輪盤點發現 **W1：unclonable IBE（RNC-IBE 填槽）** 這格全空——**現行主軸即由此長出**。詳見 [AK21 精讀報告](./Reports/AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md)。
 - **V1：UE compiler 的介面刻畫與可模糊化必要性**——仍空，適合作為論文的理論章，與 W1 共用全部定義與工具。
 - **不可複製加密的整體地圖**：從 Broadbent-Lord (2020) 的奠基性定義，到 Bhattacharyya-Broadbent-Culf (2026) 無條件不可複製位元的里程碑結果；資訊論端已被高速收割完畢，構造端仍有空白。
 
 ### 目前的工作順位
 
-1. **W1 定義章**：unclonable IBE 的 cloning game（身分金鑰查詢在 split 前／後的給法）
+1. **W1 定義章**：unclonable IBE 的 cloning game（身分金鑰查詢在 split 前／後的給法）——[草稿已寫出 Definition A/B](./Reports/Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md)，待定稿
 2. **D-W1 驗證**：「reveal 給 msk ⇒ split 後查詢自足」這個命題成不成立
 3. **pq 零件試探**：ABB／GPV 陷門能否配上 RNCE 式的 Fake/Reveal（決定甲案／乙案）
 4. 主定理 W1 的正式陳述與三段證明
 5. （平行）路線甲的 Clifford no-go 短文——最接近完成的可交付成果
 
-> **報告閱讀指南**：報告數量已多且部分結論被後續報告更正，請先看 [Reports/README.md](./Reports/README.md) 的閱讀順序、報告關係圖與關鍵事實速查表。
+> **報告閱讀指南**：報告數量已多且部分結論被後續報告更正。各報告的檔名與標題即為其大綱；完整的閱讀順序、報告關係圖與關鍵事實速查表見 [Reports/README.md](./Reports/README.md)。
 
 ## 內容索引
 
@@ -42,25 +42,27 @@ Enc(mpk, id, m):  k ← otUE.Setup
 
 完整的閱讀順序、報告間關係與更正狀態，見 [Reports/README.md](./Reports/README.md)。
 
-- [路線 W1 技術路線圖：Unclonable IBE](./Reports/Route_W1_Unclonable_IBE_Roadmap.md)
+- [Unclonable IBE 主軸路線圖：定義設計五維度、KEM-DEM 構造與主定理、三段證明骨架與硬點 D-W1、後量子零件兩案](./Reports/Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)
   — **現行主軸文件**。目標原語語義、定義設計的五個維度（A1–A5）、構造與主定理形狀、三段證明骨架與唯一硬點 D-W1、RNC-IBE 精讀的關鍵發現（Def 6 交出的是 msk）、後量子零件的兩案並陳、與 KN23／HMNY21 的邊界、執行計畫與退場條件。**（想知道現在在做什麼，只讀這一份）**
-- [Meeting 討論筆記：RNC-IBE 精讀（2026-08）](./Reports/Meeting_2026-08_W1_RNCIBE_Discussion.md)
-  — 下次個人 meeting 的討論素材：RNC-IBE 精讀長出的五個討論點（介面對上、Def 6 給 msk、D-W1、後量子零件實況、KEM 介面）、四個待拍板問題（混淆電路的範圍、pq 策略、定義取捨、佔位時機）與論文閱讀範圍表。
-- [Meeting 討論報告：兩條候選主軸（2026-07-15）](./Reports/Meeting_2026-07-15_Two_Routes_Discussion.md)
+- [Unclonable IBE 定義章草稿：game-based 上層與 simulation-based 槽位如何分層、四個模擬器對應、定義 A/B 與 KEM 版槽位介面](./Reports/Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md)
+  — 路線圖 §1–§2 的細化：為何上層用 cloning game、下層槽位必須用 stateful 模擬器；GKK25 四個模擬器逐一對應到 AK21 的哪一步（fake-key 的對應物是 Sim₄ 而非 Sim₂）；用 split 線重新理解 A1–A5、A2 的三個解；Definition A（搜尋型 t-unclonable）與 Definition B（unclonable-IND）草稿；主定理改以 RNC-IB-KEM（Def 8）為介面的理由。
+- [Meeting 筆記（2026-08）：RNC-IBE 介面核對的五個發現與三個待拍板問題](./Reports/Meeting_2026-08_RNC_IBE_Interface_Check_and_Open_Decisions.md)
+  — 個人 meeting 的討論素材：五個發現（E1–E4 逐條對上、Def 6 交出的是 msk、D-W1 的三條出路、後量子只有 Thm 3 可用且為何後量子是必要條件、主定理改走 KEM 介面），與三個待拍板問題（不用混淆電路的範圍是否含古典 Yao、pq 甲案／乙案、split 後金鑰查詢要不要寫進定義）。
+- [Meeting 報告（2026-07）：兩條候選主軸的做法、可行性、對照表與三個論文骨架選項](./Reports/Meeting_2026-07_Two_Candidate_Routes_IPFE_vs_IBE.md)
   — 給老師的 high-level 討論文件：Unclonable IPFE 與 Unclonable IBE 兩條路線各自「要做什麼、為什麼可以、大概的方式」、兩線對照表、三個論文骨架選項與待拍板問題清單。（歷史紀錄：主軸已於 2026-08-01 定案為 W1，其 §4 的骨架選項由路線圖取代）
-- [不可複製加密的論文方向：五個研究前沿](./Reports/Research_Directions_of_Unclonable_Encryption.md)
+- [不可複製加密的五個研究前沿：公鑰偽金鑰、UE 構造演進史、偽金鑰與 NCE／可否認加密的三角關係、不可複製函數加密、一對多偽金鑰推廣](./Reports/Unclonable_Encryption_Five_Research_Frontiers_Map.md)
   — 涵蓋公鑰偽金鑰、UE 演進史、偽金鑰與 NCE 的三角關係、不可複製函數加密、一對多偽金鑰推廣等五個方向的詳細分析。（方向一/三的新穎性判斷已被 2026-07 精讀報告更正，見文首更正註記）
-- [量子函數加密碩論方向 Survey](./Reports/Research_Directions_of_Quantum_Functional_Encryption.md)
+- [量子函數加密方向 Survey：老師建議的兩個延伸方向、推薦閱讀清單與「升級階梯 compiler」的研究構想](./Reports/Quantum_FE_Directions_and_Upgrade_Ladder_Idea.md)
   — 整理老師建議的兩個延伸方向、推薦閱讀清單、以及「升級階梯 compiler」的研究構想。（部分構想已被路線甲深度分析更新，見文首狀態註記）
-- [不可複製加密與難以捉摸的公鑰偽金鑰性質](./Reports/public_key_encryption_with_fake-key_property_report.md)
+- [偽金鑰性質為何至今沒有公鑰版：AK21 Def 16 的結構性障礙、公鑰 UE 的替代範式盤點與古典可模糊性概念的角色](./Reports/Fake_Key_Property_Why_No_Public_Key_Version_Exists.md)
   — 深入調查為何偽金鑰性質至今未被推廣至公鑰設定的結構性障礙，與相關古典可模糊性概念在 UE 證明中的角色。（核心判斷已被 HKNY24 App E 發現更正，見文首更正註記）
-- [2026 年 7 月文獻總盤點：近期發展與可著手的研究路線](./Reports/Survey_Recent_Developments_and_New_Routes_2026-07.md)
+- [文獻總盤點（2026-07）：MM24 之後的最新結果、空白區與擁擠區地圖、五條候選路線的優先序](./Reports/Literature_Survey_2026-07_Results_Gaps_and_Route_Ranking.md)
   — 以已精讀的四篇論文為錨點，盤點 2025 下半年至 2026 年 7 月的最新進展（BMMS26 不可能性、不可複製位元、HROM UE、多複製安全上 CRYPTO 2026 等），分析空白區與擁擠區，並評估五條候選研究路線的優先序。
-- [路線甲深度分析：從 IPFE 到 Unclonable IPFE](./Reports/Deep_Dive_Route_A_Unclonable_IPFE.md)
+- [Unclonable IPFE 備援路線深潛：目標語義釘死、MM24 三定理的介面需求、三條技術路徑 P1–P3、難點總表 D1–D10 與知識補完清單 K1–K12](./Reports/Unclonable_IPFE_Backup_Route_Paths_Obstacles_Knowledge_Gaps.md)
   — 釘死目標語義、逐條盤點 MM24 三個定理的介面需求（發現 Thm 7 lifting 消耗 universality）、提出三條技術路徑（直接合成 / 重建階梯 / Clifford 直構與其可逆性洩漏攻擊）、難點總表 D1–D10 與知識補完清單 K1–K12、12–16 週執行計畫。
-- [AK21 精讀與 PQC 槽替換品總盤點](./Reports/AK21_Close_Reading_and_PQC_Slot_Survey.md)
+- [AK21 逐頁精讀與槽位替換品盤點：介面 E1–E4、HKNY24 App E 查證、剩餘真空格 V1–V3 與第二輪候選 W1–W6](./Reports/AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md)
   — 逐頁精讀 AK21 全文（Def 16 偽金鑰、§4/§5 兩個構造與證明的完整拆解、shared-randomness 歸約技巧），歸納證明真正消耗的介面 E1–E4，發現 Def 16 過強、trapdoored 可模糊化（RNCE 形狀）即足夠——**並查證出此觀察已被 [HKNY24]（TCC 2024）Appendix E 實現**（RNCE 填槽、unclonable-IND 保持），修正三份既有報告的盲點。盤點剩餘真空格 V1–V3 與第二輪候選 W1–W6（首選 W1：unclonable IBE）。**（W1 的出處；其 §4+ 是現行主軸的起點）**
-- [白板解碼：AK21 的「otUE + PQC」配方與重構 UE 的換槽方向](./Reports/AK21_Hybrid_Recipe_and_PQC_Slot_Replacement.md)
+- [白板配方解碼：「otUE + PQC」對應到 AK21 §1.2 的混合構造、PQC 槽的真實介面、四個換槽方向 R1–R4 與白板線／路線甲的分界](./Reports/Whiteboard_Recipe_Decoded_and_PQC_Slot_Swap_Directions.md)
   — 把老師白板公式對應到 AK21 §1.2 的 hybrid approach（otUE 量子核心 + 可替換的 PQC 槽），釐清 PQC 槽的真實介面（後量子安全 + 偽金鑰性質）。在「輸出仍是 UE」的正確讀法下盤點四個換槽方向 R1–R4（公鑰偽金鑰不經 FE／compiler 解耦／unclonable-IND 版／一對多偽金鑰）與已關閉格子，並釐清白板線與路線甲是輸出物不同的兩條線、共用偽金鑰零件。含 meeting 用的定錨問題與題目提案。（R1/R3 新穎性判斷已被 v3 更正註記推翻）
 
 ### 論文（papers/）
