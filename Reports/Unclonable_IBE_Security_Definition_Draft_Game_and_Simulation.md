@@ -140,7 +140,7 @@ Expt^{cloning}_{UIBE,(A,B,C)}(1^λ, 1^T):
 
 ---
 
-## 4. 槽位定義：把 Def 6 重寫成 fake-key 的形狀
+## 4. 槽位定義：把 Def 6 重寫成 fake-key 的形狀（對應 AK21 的 Fake-Key Property）
 
 為了讓 compiler 定理跟 AK21 Thm 7 長得一模一樣，建議論文自己給一個介面定義，寫成「帶預言機的兩分布不可區分」：
 
