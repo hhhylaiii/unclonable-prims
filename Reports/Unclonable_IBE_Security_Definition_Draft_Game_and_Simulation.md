@@ -8,7 +8,7 @@
 ## 0. 定位：兩種風格不是對立，是分層
 
 | 層級 | 原語 | 風格 | 為什麼 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 上層（本文的目標原語） | Unclonable IBE | **Game-based**（cloning game） | 不可複製性是「兩人同時成功」這個**事件**的機率上界，沒有自然的 ideal functionality；且 BL20／AK21／AKL23 全系列都是 game-based |
 | 下層（槽位） | RNC-IB-KEM | **Simulation-based** | 因為有 adaptive 金鑰查詢預言機。AK21 的 fake-key（Def 16）是「兩個分布 ≈c」的一次性寫法，一旦加上互動就撐不住，**必須**升級成 stateful 模擬器 |
 
@@ -28,13 +28,13 @@ AK21 的 fake-key 只有兩個動作：
 GKK25 把它拆成四個，是因為 IBE 多了 Setup 與查詢預言機：
 
 | GKK25 | AK21 對應 | 角色 |
-|---|---|---|
+| --- | --- | --- |
 | `Sim₁(1^λ,1^T) → (mpk, st₁)` | **無**（私鑰版 Setup 平凡） | 生出帶陷門的 mpk |
 | `Sim₂(st₁, id) → sk_id`（stateful） | **無** | 維持非挑戰身分的一致性 |
 | `Sim₃(st₂, id\*) → (ct\*, st₃)` | `Enc(k, 0)` | **(a)** 訊息無關生成 |
 | `Sim₄(st₃, m\*) → msk` | **`FakeGen`** | **(b)** 事後解釋 |
 
-**⚠ 更正一個容易搞混的地方**：fake-key 的對應物是 **Sim₄，不是 Sim₂**。
+**更正一個容易搞混的地方**：fake-key 的對應物是 **Sim₄，不是 Sim₂**。
 
 兩者都「生假金鑰」，但角色相反：
 
@@ -58,7 +58,7 @@ cloning game 相對於一般安全遊戲，只多了一件事：**中間有一�
 把四個模擬器按執行時點排開：
 
 | 模擬器 | 執行時點 | 在 split 右邊？ | 施加的定義約束 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `Sim₁` | 遊戲開場 | 否 | 無 |
 | `Sim₂` | 金鑰查詢 | **看 A2 怎麼選** | ← **D-W1 的全部內容** |
 | `Sim₃` | 產生 ct\* | 否 | 無 |
@@ -67,7 +67,7 @@ cloning game 相對於一般安全遊戲，只多了一件事：**中間有一�
 **於是 A1–A5 五個維度可以重新理解成「這條線畫在哪」：**
 
 | 維度 | 它其實在問什麼 |
-|---|---|
+| --- | --- |
 | **A2** 查詢時機 | `Sim₂` 要不要被推到線的右邊。推過去 ⇒ 兩條分支各自更新 st₂ ⇒ 分岔 ⇒ 定義不可證 |
 | **A3** reveal 給什麼 | `Sim₄` 的輸出型別（msk／sk_{id\*}／setup 亂數） |
 | **A4** adaptive vs selective | `Sim₁` 吃不吃 id\* |
@@ -93,7 +93,7 @@ Enc(mpk, id, m) → ρ_ct        （量子密文）
 Dec(sk_id, ρ_ct) → m'
 ```
 
-### 3.2 Definition A（搜尋型，t-unclonable，對應 AK21 Def 11）
+### 3.2 Definition A（Unclonable Security，對應 AK21 Def 11）
 
 QPT 對手 (A, B, C)，訊息長度 n。
 
@@ -117,7 +117,7 @@ Expt^{cloning}_{UIBE,(A,B,C)}(1^λ, 1^T):
 
 **t-unclonable 安全**：對任意 QPT (A,B,C)，`Pr[Win] ≤ 2^{-n+t} + negl(λ)`。
 
-### 3.3 Definition B（不可區分型，unclonable-IND，對應 AK21 Def 12）
+### 3.3 Definition B（Unclonable-Indistinguishable Security，對應 AK21 Def 12）
 
 同上，但把 Challenge 與 Guess 改成：
 
@@ -154,6 +154,7 @@ Expt^{cloning}_{UIBE,(A,B,C)}(1^λ, 1^T):
 > ⎧ m̃pk,  O_Sim₂(st₁,·),   c̃t* ← Sim₃(st₂, id*),   Explain(st₃, k; r) ⎫
 > ⎩                                                                      ⎭
 > ```
+>
 > 其中 (m̃pk, st₁) ← Sim₁(1^λ,1^T)，`Sim₃` **不吃 k**，`Explain` 對固定的 r 是**確定性**的。
 
 三個好處：
@@ -177,7 +178,7 @@ Def 6 讓**對手選** m\*；我們的 m\* 是 otUE 的金鑰 k，由**歸約者
 證明只有兩步，而這兩步裡歸約者的**身分是相反的**——這一點值得在證明前言講明，因為它解釋了為什麼只有 Sim₄ 有「複製到兩個 register」的要求：
 
 | | Hyb₀ → Hyb₁ | Hyb₁ → otUE cloning game |
-|---|---|---|
+| --- | --- | --- |
 | 歸約者是誰 | RNC-IB-KEM 遊戲的**對手** | otUE cloning game 的**對手**，同時**自己扮演** RNC-IB-KEM 的挑戰者 |
 | 能不能碰模擬器 | **不能**（模擬器在挑戰者那邊） | **能**（自己跑 Sim₁–Sim₄） |
 | B、C 的協調問題 | **不存在**。挑戰者一次交出 (msk, ct\*, k)，歸約者原封不動同時發給 B 和 C | **存在**。k 要到 reveal 才由 otUE 挑戰者亮出，`Sim₄` 只能在 split 右邊、由 B̃／C̃ 各跑一次 |
