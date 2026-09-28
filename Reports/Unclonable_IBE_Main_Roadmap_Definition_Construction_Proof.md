@@ -106,7 +106,7 @@ Dec(sk_id, ct):      k ← RNCIBE.Dec(sk_id, ct₁)
 
 ## 3. RNC-IBE 精讀：與 W1 相關的關鍵發現
 
-> 出處：Goyal, Kitagawa, Koppula, Nishimaki, Rajasree, Yamakawa，*Non-Committing Identity Based Encryption: Constructions and Applications*，**PKC 2025**（本地 PDF 35 頁；另有 [繁中全文詳解](../papers/RNC-IBE_全文詳解_繁中.pdf)，2026-07-18 整理）。
+> 出處：Goyal, Kitagawa, Koppula, Nishimaki, Rajasree, Yamakawa，*Non-Committing Identity Based Encryption: Constructions and Applications*，**PKC 2025**（本地 PDF 35 頁，見 `papers/`；另有繁中全文詳解 `RNC-IBE_全文詳解_繁中.pdf`，2026-07-18 整理，未收入本儲存庫）。
 
 ### 3.1 語法與安全定義
 

@@ -194,4 +194,4 @@ $\tB$（$\otUE$ 遊戲 Phase 2，收到揭露的 $k$）：
 - AS26：Ananth, Sahai. *Unconditional Unclonable Encryption*. ePrint 2026/1511——Definition 2.3「Gen(1ⁿ) outputs a classical secret key k」；k = (x, z)，x₁ = 1；n-qubit 密文；1-bit 訊息；Definition 2.4 把同一把 k 揭露給 B、C。
 - GKK25 Def 6/7/8（adaptive／selective；Def 8 挑戰後無查詢階段）、§5.1（ℓ 為參數；Sim₂ 無狀態）、Thm 12、Thm 14。
 - MM24 Definition 18（量子解密金鑰的變體，不合用）。
-- 本儲存庫：`papers/Proof_of_Main_Theory_in_UIBE_2026-09-13_v3.tex`；`Reports/Replacing_Frozen_Key_Table_in_Hyb1_Deferred_Query_Lemma_and_Alternatives.md`（文首已加更正註記）；定義稿 Remark 9（古典查詢）。
+- 本儲存庫：主定理稿 [`Paper drafts/Proof_of_Main_Theory_in_UIBE.pdf`](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)（本文依據的是 2026-09-13 第三版 `Proof_of_Main_Theory_in_UIBE_2026-09-13_v3.tex`，其 LaTeX 原始檔未收入本儲存庫；現存 PDF 已更新為 v3.1）；`Reports/Replacing_Frozen_Key_Table_in_Hyb1_Deferred_Query_Lemma_and_Alternatives.md`（文首已加更正註記）；定義稿 Remark 9（古典查詢）。

@@ -13,7 +13,7 @@
 3. **混淆的來源是兩個不同的「揭露」。** otUE 的 cloning 遊戲在分裂與揭露之間沒有任何互動——BL20 Def 7 甚至把分裂後的一方形式化為 D(H_K ⊗ H_B) → D(H_M)，金鑰與暫存器同時作為輸入。所以 B̃ 從「出生」就有 k；B 的整段分裂後生涯（含揭露前的查詢）都是 B̃ 在拿到 k 之後才模擬的。Lemma 1 想做的「延後」，在 otUE 那一層是**自動**發生的。
 4. **真正的時間邊界是「分裂」，不是「揭露」。** 證明無法供應的只有一種金鑰：**挑戰之後、分裂之前** 由 A 查詢的金鑰（Ã 在分裂前不知道 k，而 GKK25 Def 8 的模擬器在挑戰後不回答查詢）。我們的定義本來就不給 A 這種查詢——建議把這條邊界與理由明寫成一則 Remark。
 5. **文獻印證**：結構最接近的是 GKK25 自己的 Thm 15（RNC-IB-KEM ⇒ incompressible IBE）：第二階段的歸約 B₂ 一開始就收到 SKE 金鑰、跑 Sim₄ 得 msk——與我們的 B̃ 完全同構。反過來，它的 Def 4 允許第一階段對手在挑戰後查詢，而其證明概要沒有交代這一步——正是第 4 點的障礙。HMNY21 的 certified-deletion ABE 也允許挑戰後、刪除前的查詢，而它的 NC-ABE 語法有一個不吃訊息的 FakeSK，正是處理這種查詢所需的額外槽位性質。
-6. **建議**：採「直接模擬」；刪除 Lemma 1；新增兩則 Remark（兩個揭露事件、時間邊界）。順帶修正 v3 中「SXDH／DDH 是合法實例」的錯誤。完整稿見 `papers/Proof_of_Main_Theory_in_UIBE_2026-09-27_v3_1.tex`。
+6. **建議**：採「直接模擬」；刪除 Lemma 1；新增兩則 Remark（兩個揭露事件、時間邊界）。順帶修正 v3 中「SXDH／DDH 是合法實例」的錯誤。完整稿（v3.1）見 [`Paper drafts/Proof_of_Main_Theory_in_UIBE.pdf`](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)（LaTeX 原始檔 `Proof_of_Main_Theory_in_UIBE_2026-09-27_v3_1.tex` 未收入本儲存庫）。
 
 ---
 

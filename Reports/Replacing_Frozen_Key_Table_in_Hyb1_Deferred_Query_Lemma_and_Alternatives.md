@@ -5,7 +5,7 @@
 > **⚠ 2026-09-13 更正**（見 `Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md` §2.4）：本文的主結論「表 K 整個刪掉、身分空間任意、不改 GKK25 假設」不變，但**機制被更簡單的事實取代**——D-W1 從一開始就不是問題。挑戰之後的所有金鑰（含分裂後、揭露前的查詢）都由 KeyGen(m̃sk, ·) 供應：Claim 1 的 R 在挑戰階段就拿到 m̄sk；Claim 2 的 B̃ 在 otUE 遊戲 Phase 2 一開始就拿到 k、算得出 m̃sk，因此 B 分裂後**任何時點**的查詢它都答得出來。§1.3 所說「wrapper 在揭露前算不出 m̃sk」混淆了 UIBE 的揭露與 otUE 的揭露，是錯的。延後引理（Lemma D）本身仍然成立，可留作備註，但**不需要進證明**；§2.6 的 sk_{id\*} 變體同樣不需要它。§3.B 對「無狀態模擬器」的分析（救不了 Claim 1）仍正確，但其前提——需要有人在分裂後呼叫 Sim₂——本身就不成立。
 >
 > **日期**：2026-09-12
-> **議題來源**：老師對主定理討論稿（`papers/Proof_of_Main_Theory_in_UIBE.pdf`，Hyb₁ 第 3 步「先做凍結」處的畫線）的意見：在 Hyb₁ 裡維護整張金鑰表 K 不可行，會碰到指數大的東西。
+> **議題來源**：老師對主定理討論稿（當時的 `papers/Proof_of_Main_Theory_in_UIBE.pdf`，Hyb₁ 第 3 步「先做凍結」處的畫線；該檔現已移至 `Paper drafts/` 並更新為 v3.1，凍結步驟已刪除）的意見：在 Hyb₁ 裡維護整張金鑰表 K 不可行，會碰到指數大的東西。
 > **本文回答的問題**：表 K 到底在證明裡扮演什麼角色、「指數」精確地出在哪、可以換成什麼、各方案代價為何、別人怎麼處理同類問題。
 > **一句話結論**：表 K 可以**整個刪掉**，而且不需要改動 GKK25 的假設，也不需要改動老師已核可的定義——只要在證明開頭加一條「分裂後查詢可延後到揭露之後」的 WLOG 引理。刪掉之後，主定理不再依賴 T = poly(λ)，身分空間可以是指數大。
 
@@ -296,4 +296,4 @@ $\cA$ 的分裂映射、揭露的 $\msk$——在兩個實驗中逐位元相同�
 - **[BK23]** Bartusek, Khurana. *Cryptography with Certified Deletion*. CRYPTO 2023, ePrint 2022/1178.
 - **[PRV26]** Poremba, Ragavan, Vaikuntanathan. *Cloning Games, Black Holes and Cryptography*. ITCS 2026.
 - **[B+26]** Bartusek et al. *Unclonable Encryption in the Haar Random Oracle Model*. arXiv:2603.11437 (2026).
-- 本儲存庫：`Reports/Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md`（D-W1 與三條出路）、`Reports/Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md`（§3 出路表、Remark 5/8）、`papers/Proof_of_Main_Theory_in_UIBE_2026-09-12_OTP.tex`（現行主定理文件）。
+- 本儲存庫：`Reports/Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md`（D-W1 與三條出路）、`Reports/Unclonable_IBE_Security_Definition_Draft_Game_and_Simulation.md`（§3 出路表、Remark 5/8）、`Proof_of_Main_Theory_in_UIBE_2026-09-12_OTP.tex`（撰寫當時的主定理文件，LaTeX 原始檔未收入本儲存庫；最新版 v3.1 的 PDF 見 [`Paper drafts/Proof_of_Main_Theory_in_UIBE.pdf`](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)）。

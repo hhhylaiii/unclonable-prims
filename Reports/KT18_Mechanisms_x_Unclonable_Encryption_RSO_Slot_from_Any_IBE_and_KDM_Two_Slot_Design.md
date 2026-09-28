@@ -2,8 +2,8 @@
 
 > **日期**：2026-09-28
 > **議題來源**：老師希望下一步把 Kitagawa–Tanaka〈Key Dependent Message Security and Receiver Selective Opening Security for Identity-Based Encryption〉（PKC 2018，下稱 **KT18**）的機制，像目前把 RNC-IB-KEM 接上 otUE 那樣，與不可複製加密結合。
-> **上位文件**：[主定理稿 v3.1](./Proof_of_Main_Theory_in_UIBE.pdf)（Construction 1、Definition 2/3、Claim 1/2、Remark 2「時間邊界是分裂」、Remark 3「揭露 msk 的強化版」）。
-> **配套 LaTeX 稿**：`W1_KT18結合_構造定理與證明_LaTeX_2026-09-28.tex`（claude.ai 專案內；預覽 PDF 在 `Claude outputs/`）——本文 §3、§4 的定義、構造、定理與完整 hybrid 證明的正式版。
+> **上位文件**：[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)（Construction 1、Definition 2/3、Claim 1/2、Remark 2「時間邊界是分裂」、Remark 3「揭露 msk 的強化版」）。
+> **配套 LaTeX 稿**：`W1_KT18結合_構造定理與證明_LaTeX_2026-09-28.tex`（claude.ai 專案內；編譯後的 PDF 收在 [`Paper drafts/KT18_x_UE_Constructions_Theorems_Proofs.pdf`](../Paper%20drafts/KT18_x_UE_Constructions_Theorems_Proofs.pdf)）——本文 §3、§4 的定義、構造、定理與完整 hybrid 證明的正式版。
 > **一句話結論**：可以，而且 KT18 的兩個機制各有去處。**RSO 機制（雙重加密）可以直接取代 GKK25 當古典槽**——因為 09-13 起揭露物改成 sk_{id\*}，槽位只需要「對使用者金鑰非承諾」，而 KT18 從**任意** IND-ID-CPA IBE 就給得出這個性質；得到的 UIBE 在 LWE 下支援**指數大小身分空間**，並順帶對任意身分空間解除 v3.1 Remark 2 的時間邊界。**KDM 機制不能直接填 k 的槽**（KDM 與事後模糊化互相衝突），但可以當**第二個古典槽**裝「被遮罩的訊息」，得到同時具備 KDM 安全、且「在 key-dependent 密文存在下仍不可複製」的 UIBE——文獻中沒有的新組合。
 
 ---
@@ -424,7 +424,7 @@ H₃
 ## 7. 下一步
 
 1. **Meeting**：報告 §3.1 的觀察與 Construction 2；請老師回答 Q1–Q5。
-2. **LaTeX**：本次已附 `W1_KT18結合_構造定理與證明_LaTeX_2026-09-28.tex`（Construction 2/2′/3、Definition 2⁺／SO-cloning／K1／K2、Theorem 3–6、Proposition 1 與證明）。拍板後併入主稿。
+2. **LaTeX**：本次已附 `W1_KT18結合_構造定理與證明_LaTeX_2026-09-28.tex`（Construction 2/2′/3、Definition 2⁺／SO-cloning／K1／K2、Theorem 3–6、Proposition 1 與證明；PDF 見 `Paper drafts/KT18_x_UE_Constructions_Theorems_Proofs.pdf`）。拍板後併入主稿。
 3. **修訂三的延伸**（QPT 提升）：確認所選 LWE IBE 的 adaptive 證明為 straight-line（ABB10 adaptive 版、CHKP10 的 partitioning／artificial abort 不回捲對手）；若改走 QROM 的 GPV08＋Zha12，要另外處理 cloning 遊戲中 A、B、C 的量子隨機預言機存取與 wrapper 兩側的一致模擬。KdmIBE 三步（IND-ID-CPA、GC、KDM-SKE）皆為 straight-line，列一段附錄。
 4. **定義章整理**：把「使用者金鑰層級 RNC」寫成介面定義，讓 Construction 1、2 都成為實例。
 5. **新穎性複查**：unclonable × {IBE, KDM, selective opening, non-committing} 的 ePrint 全文檢索；追蹤引用 KT18、GKK25、HKNY24 的新論文。
@@ -451,4 +451,4 @@ H₃
 - **[App11]** B. Applebaum. *Key-Dependent Message Security: Generic Amplification and Completeness*. EUROCRYPT 2011.
 - **[BK23]** J. Bartusek, D. Khurana. *Cryptography with Certified Deletion*. CRYPTO 2023.（§7 第 6 點，僅列為待調研方向）
 
-> **相關報告**：[主定理稿 v3.1](./Proof_of_Main_Theory_in_UIBE.pdf)｜[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)（「誰在回答查詢」的分析方式，本文 §3.4 沿用）｜[古典／量子盤點報告](./Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md)（分裂後禁查 id\* 的討論，本文 §3.5 第 2 點）｜[W1 路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)（§4 甲案／乙案，本文 §3.6 更新其前提）｜[Reports 導覽](./README.md)
+> **相關報告**：[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)｜[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)（「誰在回答查詢」的分析方式，本文 §3.4 沿用）｜[古典／量子盤點報告](./Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md)（分裂後禁查 id\* 的討論，本文 §3.5 第 2 點）｜[W1 路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)（§4 甲案／乙案，本文 §3.6 更新其前提）｜[Reports 導覽](./README.md)
