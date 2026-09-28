@@ -22,7 +22,7 @@ Construction 1:  (ct₁, k̄) ← IBKEM.Encap(mpk, id);  k ← otUE.Setup;  c₂
 - **Construction 2**：以 KT18 的 RSO 雙重加密當 k 的槽——**任意**後量子 IND-ID-CPA IBE ＋ t-unclonable otUE ⇒ t-unclonable UIBE，證明不用任何模擬器；以 LWE adaptive IBE 實例化即得**指數身分空間**的後量子 UIBE。對現行定義而言，路線圖的甲案／乙案困境消失；揭露 msk 的強化版仍只由 Construction 1 提供。
 - **Construction 3（雙槽）**：k 走 RSO 槽、被遮罩的訊息走 KT18 的 KDM 槽，同時達到 KDM-CPA 與 **KDM-unclonable**——文獻中沒有的新組合。
 
-當前決策點：KT18 報告 §6 的 Q1–Q5 待老師拍板（主定理是否改為兩個實例化定理、是否採用允許挑戰後查詢的 Definition 2⁺、KDM-unclonable 的定義形狀等）；v3.1 Definition 2 的查詢階段 II／III 與 Remark 2 的時間邊界待老師確認。
+當前決策點：KT18 報告 §6 的 Q1–Q5 待老師拍板（主定理是否改為兩個實例化定理、是否採用允許挑戰後查詢的 Definition 2⁺、KDM-unclonable 的定義形狀等）；v3.1 Definition 2 的查詢階段 II／III 與 Remark 2 的時間邊界待老師確認（查詢階段 II／III 的禁查 id\* 與 non-adaptive 選項，建議見[揭露後禁查 id\* 評估](./Reports/Post_Reveal_Challenge_Identity_Query_Ban_vs_Non_Adaptive_Evaluation.md)）。
 
 整體技術地圖（定義維度 A1–A5、與既有工作的邊界）見 **[Unclonable IBE 主軸路線圖](./Reports/Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)**——其 D-W1 與甲乙案已被後續報告更新，見文首狀態註記。
 
@@ -52,8 +52,10 @@ Construction 1:  (ct₁, k̄) ← IBKEM.Encap(mpk, id);  k ← otUE.Setup;  c₂
 
 **主定理與證明（2026-08-28 起，由新到舊）**
 
+- [揭露後禁查 id\* 與 non-adaptive 選項：評估與建議修改](./Reports/Post_Reveal_Challenge_Identity_Query_Ban_vs_Non_Adaptive_Evaluation.md)
+  — **最新**（2026-09-28）。老師問「揭露後禁查 id\* 怪怪的，或用 non-adaptive 就好？」：分裂後的禁令不擋平凡攻擊；三條引理（揭露前後的查詢等價、msk 版 ⇒ 不設限版 ⇒ 現行版、確定性 KeyGen 下禁令為空）；建議分裂前禁查、分裂後先揭露再不設限；Construction 1 零成本、Construction 2 需 PRF 去隨機化；non-adaptive 不需要；附可貼 Overleaf 的定義與 Remark。
 - [KT18 × 不可複製加密：RSO 機制直接填槽（任意 IBE ⇒ UIBE）、KDM 機制的雙槽設計、兩個新安全概念與證明骨架](./Reports/KT18_Mechanisms_x_Unclonable_Encryption_RSO_Slot_from_Any_IBE_and_KDM_Two_Slot_Design.md)
-  — **最新**（2026-09-28）。KT18 精讀（KDM／RSO 兩個機制與共同骨架）；Construction 2：RSO 雙重加密當 k 的槽，任意後量子 IND-ID-CPA IBE ⇒ UIBE（指數身分空間、允許挑戰後查詢）；RSO 延伸（多目標選擇性開啟，Theorem 4、Proposition 1）；KDM 放進 cloning game 的三個陷阱與 Construction 3（雙槽，Theorem 5/6）；三個構造總對照與待拍板問題 Q1–Q5。
+  — 2026-09-28。KT18 精讀（KDM／RSO 兩個機制與共同骨架）；Construction 2：RSO 雙重加密當 k 的槽，任意後量子 IND-ID-CPA IBE ⇒ UIBE（指數身分空間、允許挑戰後查詢）；RSO 延伸（多目標選擇性開啟，Theorem 4、Proposition 1）；KDM 放進 cloning game 的三個陷阱與 Construction 3（雙槽，Theorem 5/6）；三個構造總對照與待拍板問題 Q1–Q5。
 - [Lemma 1（分裂後查詢延後）不需要：誰在回答查詢、兩個揭露事件、兩階段遊戲的文獻做法與真正的時間邊界](./Reports/Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)
   — 2026-09-27。四個遊戲逐一核對「誰在回答查詢」；UIBE 的揭露（sk_{id\*}）與 otUE 的揭露（k）是兩個不同事件；真正的時間邊界是分裂而非揭露；文獻對照（GKK25 Thm 15、HMNY21）。**主定理稿 v3.1 由此產生**。
 - [老師的兩個提問：系統內的古典／量子物件盤點；「不得查詢 id\*」規則與 non-adaptive 選項的評估](./Reports/Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md)
