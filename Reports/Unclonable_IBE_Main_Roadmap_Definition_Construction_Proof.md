@@ -1,5 +1,11 @@
 # Unclonable IBE 主軸路線圖：定義設計五維度、KEM-DEM 構造與主定理、三段證明骨架與硬點 D-W1、後量子零件兩案
 
+> **⚠ 2026-09-28 狀態更新（本文部分內容已被後續文件取代）**：
+> - **主定理與完整證明**已寫成[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)（2026-09-27）。構造改為 KEM ＋ OTP 墊層 `ct = (ct₁, c₂ := k̄ ⊕ k, otUE.Enc(k, m))`（v3.1 修訂二，已拍板）；揭露物依老師要求改為 sk_{id\*}（修訂四），本文 §3.3 的「揭露 msk」版保留為 v3.1 Remark 3 的強化版。
+> - **D-W1（§2.3）從一開始就不是問題**：挑戰之後的所有金鑰都由 KeyGen(m̃sk, ·) 供應，Claim 2 的 B̃ 一開始執行就拿到 k、算得出 m̃sk。凍結、表 K 與延後引理都已刪除，主定理對任意身分空間成立；證明真正的時間邊界是「分裂」（A 不得在挑戰後、分裂前查詢）。見[古典／量子盤點報告](./Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md) §2.4、[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)。
+> - **後量子零件（§4）**：SXDH／DDH 實例對 QPT 對手不安全（cloning 對手可在分裂前以 Shor 打開古典槽），Construction 1 目前唯一合法的實例是 GKK25 Thm 3/14 取 LWE（poly-ID）。**§4.3 的甲案／乙案**：[KT18 報告](./KT18_Mechanisms_x_Unclonable_Encryption_RSO_Slot_from_Any_IBE_and_KDM_Two_Slot_Design.md) §3 以 KT18 的雙重加密當槽（Construction 2），從任意後量子 IND-ID-CPA IBE 得到 UIBE，以 LWE 實例化即為指數身分空間——對現行定義（揭露 sk_{id\*}）而言兩案的困境消失，乙案只剩「msk 版指數 ID」的用途（待老師拍板，見該報告 Q1）。
+> - 本文的定義維度 A1–A5（§1.2）、與既有工作的邊界（§5）、對既有報告的更正 C1–C4（§6）仍然有效。
+
 > **日期**：2026-08-01
 > **狀態**：**現行主軸**。碩論方向已定案為 W1（不可複製身分基加密），本文取代 Meeting 報告 §4 的「三個骨架選項」，成為主軸的技術總圖。
 > **前身**：本路線在 [AK21 精讀報告](./AK21_Close_Reading_Slot_Interfaces_and_Route_Candidates.md) §4+ 首次提出（編號 W1），在 [Meeting 討論報告](./Meeting_2026-07_Two_Candidate_Routes_IPFE_vs_IBE.md) §3 以「路線二」與 Unclonable IPFE 並列。現在並列狀態結束。

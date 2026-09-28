@@ -1,5 +1,13 @@
 # Unclonable IBE 定義章草稿：game-based 上層與 simulation-based 槽位如何分層、四個模擬器對應 AK21 的哪一步、cloning game 定義 A/B 與 KEM 版槽位介面
 
+> **⚠ 2026-09-28 狀態更新（定義 A/B 待同步到主定理稿 v3.1）**：本文 §3 的 Definition A／B 已由[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf) 的 Definition 2／3 取代（v3.1 §5 第 2 點把「定義章同步」列為待辦；本文的 PDF 版 [`Paper drafts/Draft_of_Security_Definition_of_Unclonable_IBE.pdf`](../Paper%20drafts/Draft_of_Security_Definition_of_Unclonable_IBE.pdf) 同樣待同步）。差異：
+> - **揭露物**：由整把 msk 改為挑戰身分的 sk_{id\*}，同一把交給 B、C（修訂四，老師要求）；msk 版保留為 v3.1 Remark 3 的強化版。
+> - **分裂後查詢**：分為揭露前（查詢階段 II）與揭露後（查詢階段 III）兩段，都由挑戰者回答、都禁查 id\*；預言機採標準約定（每次新鮮隨機性），memoized 提案（修訂一）已撤回；語法改為 Setup(1^λ, 1^d)，身分空間任意。
+> - **§2 的「A2 三個解」不再需要**：D-W1 從一開始就不是問題——分裂後的查詢由持有 m̃sk 的一方以 KeyGen 回答，線右邊不再有 Sim₂（[古典／量子盤點報告](./Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md) §2.4、[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)）；解 1 的凍結已刪除（v3.1 修訂五）；解 2 所說「定義較弱」，[凍結表報告](./Replacing_Frozen_Key_Table_in_Hyb1_Deferred_Query_Lemma_and_Alternatives.md) §0 第 4 點已更正為與「揭露前查詢」等價。證明真正的時間邊界是「分裂」（v3.1 Remark 2）。
+> - **構造**（PDF 版第 4 節）：加密第 2 步由 `k := otUE.Setup(1^λ; k̄)` 改為正常抽樣 `k ← otUE.Setup(1^λ)` 加 OTP 墊層 `c₂ := k̄ ⊕ k`（修訂二，已拍板）。
+>
+> §0–§1（兩種風格的分層、四個模擬器與 AK21 的對應）與 §4.1（主定理以 RNC-IB-KEM 為介面）仍然有效。
+
 > **日期**：2026-08-07。回應「AK21 是 game-based、GKK25 是 simulation-based，我們該怎麼定義」
 > **上位文件**：[Unclonable IBE 主軸路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)——本文細化其 §1（定義維度 A1–A5）與 §2（證明骨架與 D-W1）。
 

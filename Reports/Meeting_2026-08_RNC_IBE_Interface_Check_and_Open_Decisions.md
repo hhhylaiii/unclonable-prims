@@ -1,5 +1,11 @@
 # Meeting 筆記（2026-08）：RNC-IBE 介面核對的五個發現（E1–E4 對上、Def 6 給 msk、D-W1、後量子只剩一個構造、改用 KEM 介面）與三個待拍板問題
 
+> **⚠ 2026-09-28 狀態更新**：本筆記的發現與待拍板問題後續如下——
+> - **§2.3（split 後查詢要不要進定義）已定**：[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf) 的定義保留分裂後查詢（查詢階段 II／III，由挑戰者回答、禁查 id\*）。§1.3 的 D-W1 風險後來確認從一開始就不存在（[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)）。
+> - **§1.2（Def 6 給 msk）**：定義依老師要求改為只揭露 sk_{id\*}（v3.1 修訂四）；msk 版保留為 v3.1 Remark 3 的強化版。
+> - **§2.2（甲案／乙案）的前提已改變**：[KT18 報告](./KT18_Mechanisms_x_Unclonable_Encryption_RSO_Slot_from_Any_IBE_and_KDM_Two_Slot_Design.md) 的 Construction 2 從任意後量子 IND-ID-CPA IBE 得到 UIBE，以 LWE 實例化即為指數身分空間，且不使用 garbled circuit（與 §2.1 的範圍問題相關）；待老師拍板（該報告 Q1）。
+> - **§1.4（後量子只剩 Thm 3 取 LWE）仍成立**，並已據此更正凍結表報告與古典／量子盤點報告中「SXDH／DDH 是合法實例」的錯誤。
+
 > **整理日期**：2026-08-01
 > **技術細節**：見[路線 W1 技術路線圖](./Unclonable_IBE_Main_Roadmap_Definition_Construction_Proof.md)。
 

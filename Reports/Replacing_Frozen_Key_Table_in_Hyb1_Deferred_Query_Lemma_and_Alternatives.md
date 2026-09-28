@@ -1,5 +1,7 @@
 # 換掉 Hyb₁ 的凍結表 K：分裂後查詢的「延後引理」、四條替代路線的評估與文獻對照
 
+> **⚠ 2026-09-28 狀態**：下列兩則更正已併入[主定理稿 v3.1](../Paper%20drafts/Proof_of_Main_Theory_in_UIBE.pdf)（2026-09-27）：延後引理（本文的 Lemma D，即 v3 的 Lemma 1）、凍結與表 K 皆已刪除，唯一合法的後量子實例寫為 GKK25 Thm 3/14 取 LWE（見[延後引理報告](./Deferred_Query_Lemma_Unnecessary_Who_Answers_Queries_Two_Reveals.md)）。更正二提到的乙案（後量子、指數身分空間），對現行定義（揭露 sk_{id\*}）而言另有出路：[KT18 報告](./KT18_Mechanisms_x_Unclonable_Encryption_RSO_Slot_from_Any_IBE_and_KDM_Two_Slot_Design.md) 的 Construction 2（任意後量子 IND-ID-CPA IBE ⇒ UIBE）。
+>
 > **⚠ 2026-09-27 更正二（重讀全部資料時發現）**：§0 第 3 點與 §2.5 說刪除凍結後「GKK25 Thm 12（SXDH）與 Thm 3/14（DDH／LWE）都是合法實例」——**這是錯的**。主定理要求 RNC-IB-KEM 對 QPT 對手安全，而 cloning game 的對手本來就是量子的；SXDH／DDH 的古典槽會被 Shor 在分裂前直接打開（取出 session key → k → m，把古典的 m 複製給 B、C），是直接攻擊（見 `Meeting_2026-08_RNC_IBE_Interface_Check_and_Open_Decisions.md` §1.4）。**目前唯一合法的實例仍是 Thm 3 取 X = LWE（poly-ID）。** 刪除凍結的真正收益是：主定理對任何未來的後量子、指數身分空間 RNC-IB-KEM（乙案）原封不動成立——這推翻了 08-07 可行性覆核「乙案只能證較弱查詢時序」的判斷，對甲／乙案的取捨有影響。
 >
 > **⚠ 2026-09-13 更正**（見 `Classical_vs_Quantum_Inventory_and_Challenge_Identity_Query_Rule_Evaluation.md` §2.4）：本文的主結論「表 K 整個刪掉、身分空間任意、不改 GKK25 假設」不變，但**機制被更簡單的事實取代**——D-W1 從一開始就不是問題。挑戰之後的所有金鑰（含分裂後、揭露前的查詢）都由 KeyGen(m̃sk, ·) 供應：Claim 1 的 R 在挑戰階段就拿到 m̄sk；Claim 2 的 B̃ 在 otUE 遊戲 Phase 2 一開始就拿到 k、算得出 m̃sk，因此 B 分裂後**任何時點**的查詢它都答得出來。§1.3 所說「wrapper 在揭露前算不出 m̃sk」混淆了 UIBE 的揭露與 otUE 的揭露，是錯的。延後引理（Lemma D）本身仍然成立，可留作備註，但**不需要進證明**；§2.6 的 sk_{id\*} 變體同樣不需要它。§3.B 對「無狀態模擬器」的分析（救不了 Claim 1）仍正確，但其前提——需要有人在分裂後呼叫 Sim₂——本身就不成立。
